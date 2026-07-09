@@ -35,3 +35,4 @@ Legal compliance pages in Slovak; improve hero hierarchy and money emphasis; Dis
 - Local `npm run build` fails on Vercel Blob OIDC in dev; `tsc -b` + `vite build` pass locally
 - `src/lib/olympics-content.json` is a scraper artifact — not committed
 - Slovak typographic quotes (`„…"`) need single-quoted JS strings to avoid TS parse errors
+- Proof collage Discord badge must stay compact on mobile (`w-[72px]`) and Výsledok 3 shifts left (`right-[20%]`, `w-[42%]`) to avoid overlap

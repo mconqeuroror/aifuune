@@ -159,7 +159,7 @@ export function ProofCollage() {
             alt="Výsledok 3"
             loading="lazy"
             decoding="async"
-            className="absolute bottom-[10%] right-[10%] z-10 w-[28%] rounded-xl object-cover shadow-lg ring-1 ring-white/40"
+            className="absolute bottom-[16%] right-[20%] z-20 w-[42%] rounded-xl object-cover shadow-lg ring-1 ring-white/40 sm:bottom-[10%] sm:right-[10%] sm:w-[28%]"
           />
 
           <motion.img
@@ -173,21 +173,23 @@ export function ProofCollage() {
 
           <motion.div
             style={{ y: y1 }}
-            className="absolute bottom-[4%] right-[4%] z-30 rounded-lg bg-[#313338] p-2 text-white shadow-xl"
+            className="absolute bottom-[2%] right-[2%] z-30 w-[72px] rounded-md bg-[#313338] p-1 text-white shadow-lg sm:bottom-[4%] sm:right-[4%] sm:w-auto sm:max-w-none sm:rounded-lg sm:p-2 sm:shadow-xl"
           >
-            <div className="mb-1.5 flex items-center gap-1.5">
-              <div className="flex size-5 items-center justify-center rounded-full bg-[#5865F2] text-white">
-                <DiscordIcon />
+            <div className="mb-0.5 flex items-center gap-1 sm:mb-1.5 sm:gap-1.5">
+              <div className="flex size-3.5 shrink-0 items-center justify-center rounded-full bg-[#5865F2] text-white sm:size-5">
+                <DiscordIcon className="size-2.5 sm:size-3" />
               </div>
-              <div className="text-[10px] font-semibold">AI Fuňe</div>
+              <div className="truncate text-[8px] font-semibold leading-none sm:text-[10px]">
+                AI Fuňe
+              </div>
             </div>
-            <div className="flex flex-wrap gap-1">
-              <span className="inline-flex items-center gap-1 rounded-full bg-green-500/15 px-1.5 py-px text-[9px] font-medium text-green-400">
-                <span className="size-1 rounded-full bg-green-500" />
-                Online teraz
+            <div className="flex flex-wrap gap-0.5 sm:gap-1">
+              <span className="inline-flex items-center gap-0.5 rounded-full bg-green-500/15 px-1 py-px text-[7px] font-medium leading-none text-green-400 sm:gap-1 sm:px-1.5 sm:text-[9px]">
+                <span className="size-0.5 rounded-full bg-green-500 sm:size-1" />
+                Online
               </span>
-              <span className="rounded-full bg-white/10 px-1.5 py-px text-[9px] font-medium text-zinc-300">
-                Členov 1300+
+              <span className="rounded-full bg-white/10 px-1 py-px text-[7px] font-medium leading-none text-zinc-300 sm:px-1.5 sm:text-[9px]">
+                1300+
               </span>
             </div>
           </motion.div>
