@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { IMAGES } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="border-t border-black/6 bg-background px-4 py-12 sm:px-6">
+    <footer className="border-t border-black/6 bg-background px-4 py-12 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] sm:px-6">
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-3">
         <div>
           <img
@@ -18,19 +19,28 @@ export function Footer() {
           </h3>
           <ul className="space-y-2 text-sm text-muted">
             <li>
-              <a href="#" className="hover:text-accent transition-colors">
+              <Link
+                to="/obchodne-podmienky"
+                className="inline-flex min-h-11 items-center hover:text-accent transition-colors"
+              >
                 Obchodné podmienky
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-accent transition-colors">
+              <Link
+                to="/ochrana-osobnych-udajov"
+                className="inline-flex min-h-11 items-center hover:text-accent transition-colors"
+              >
                 Ochrana osobných údajov
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-accent transition-colors">
+              <Link
+                to="/cookies"
+                className="inline-flex min-h-11 items-center hover:text-accent transition-colors"
+              >
                 Cookies
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -43,7 +53,7 @@ export function Footer() {
             <li>
               <a
                 href="mailto:jorgebyznys@gmail.com"
-                className="hover:text-accent transition-colors"
+                className="inline-flex min-h-11 items-center hover:text-accent transition-colors"
               >
                 jorgebyznys@gmail.com
               </a>
@@ -51,7 +61,7 @@ export function Footer() {
             <li>
               <a
                 href="tel:+421940216575"
-                className="hover:text-accent transition-colors"
+                className="inline-flex min-h-11 items-center hover:text-accent transition-colors"
               >
                 +421 940 216 575
               </a>

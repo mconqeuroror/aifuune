@@ -12,24 +12,47 @@
   --color-foreground: #18181b;
   --color-card: #ffffff;
   --color-border: rgba(0, 0, 0, 0.08);
-  --radius-lg: 0.75rem;
+  /* Tighter radius scale — Chrome renders large radii more aggressively than embedded previews */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.625rem;
+  --radius-2xl: 0.75rem;
+  --radius-3xl: 0.875rem;
+  --radius-4xl: 1rem;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   scroll-behavior: smooth;
+  width: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  width: 100%;
   font-family: var(--font-sans);
   background: var(--color-background);
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
 }
 
 .font-display {
@@ -92,6 +115,13 @@ body {
   color: transparent;
 }
 
+.text-money-glow {
+  text-shadow:
+    0 0 10px rgba(22, 163, 74, 0.5),
+    0 0 24px rgba(22, 163, 74, 0.3),
+    0 0 48px rgba(22, 163, 74, 0.15);
+}
+
 .glass-gold {
   background: rgba(255, 251, 235, 0.65);
   backdrop-filter: blur(20px) saturate(1.4);
@@ -106,4 +136,16 @@ body {
   box-shadow:
     0 0 0 1px rgba(251, 191, 36, 0.15),
     0 8px 32px rgba(251, 191, 36, 0.12);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-gold,
+  .glass-header-scrolled {
+    background: rgba(255, 255, 255, 0.94);
+  }
+}
+
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
 }

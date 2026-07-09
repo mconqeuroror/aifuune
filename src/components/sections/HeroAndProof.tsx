@@ -1,37 +1,26 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { AppleEmoji } from "@/components/AppleEmoji";
+import { DiscordIcon } from "@/components/DiscordIcon";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { HERO_PROOF_CARDS, IMAGES } from "@/lib/content";
 import { assetUrl } from "@/lib/asset-base";
-
-function Blob({ className }: { className?: string }) {
-  return (
-    <div
-      aria-hidden
-      className={`pointer-events-none absolute rounded-full blur-3xl ${className}`}
-    />
-  );
-}
 
 export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden px-4 pb-4 pt-2 sm:px-6 sm:pb-8 sm:pt-4"
+      className="relative overflow-hidden px-3 pb-4 pt-2 sm:px-6 sm:pb-8 sm:pt-4"
     >
-      <Blob className="left-1/4 top-8 size-64 bg-accent/10" />
-      <Blob className="right-1/4 top-16 size-56 bg-cyan-300/15" />
-
       <div className="relative mx-auto max-w-3xl text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
-          className="pt-2 text-[1.4rem] font-bold leading-tight tracking-tight sm:pt-4 sm:text-3xl md:text-[2.35rem]"
+          className="pt-2 text-[1.75rem] font-bold leading-[1.15] tracking-tight sm:pt-4 sm:text-4xl md:text-[2.85rem]"
         >
           Ako zarobiť{" "}
-          <span className="font-display font-bold text-money">
+          <span className="font-display font-bold text-money text-money-glow">
             10 000 €+ mesačne
           </span>{" "}
           s AI fuňami
@@ -41,7 +30,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.05 }}
-          className="mt-3 text-sm leading-relaxed text-foreground/85 sm:text-base"
+          className="mt-3 text-xs leading-relaxed text-foreground/80 sm:text-sm"
         >
           Ukážem ti presný postup. Od nuly až po prvé peniaze.
           <br />
@@ -61,12 +50,12 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.1 }}
-          className="mt-4 flex items-start justify-center gap-2 text-sm leading-relaxed text-foreground/80 sm:text-base"
+          className="mt-4 flex items-start justify-center gap-2 px-1 text-sm leading-relaxed text-foreground/80 sm:mt-4 sm:px-0 sm:text-base"
         >
           <AppleEmoji name="gift" size={22} className="mt-0.5 shrink-0" />
           <span>
             Bonus: medzi prihlásenými rozdávame balík v hodnote{" "}
-            <span className="font-medium text-money">4000+ €</span> — MacBook Air,
+            <span className="font-medium text-money text-money-glow">4000+ €</span> — MacBook Air,
             iPhone 17 Pro, 500 € a týždeň koučingu so mnou.
           </span>
         </motion.p>
@@ -85,10 +74,10 @@ function HeroProofStrip() {
       transition={{ duration: 0.5, delay: 0.16 }}
       className="mt-5 text-left sm:mt-6"
     >
-      <p className="mb-2.5 text-center text-[11px] font-medium text-muted sm:text-xs">
+      <p className="mb-2.5 text-center text-xs font-medium text-muted">
         1300+ členov · Online teraz · posledný sa pridal pred 10 min
       </p>
-      <div className="grid grid-cols-3 gap-2 sm:gap-3">
+      <div className="grid grid-cols-2 gap-2 min-[480px]:grid-cols-3 sm:gap-3">
         {HERO_PROOF_CARDS.map((card) => (
           <div
             key={card.src}
@@ -187,8 +176,8 @@ export function ProofCollage() {
             className="absolute bottom-[4%] right-[4%] z-30 rounded-lg bg-[#313338] p-2 text-white shadow-xl"
           >
             <div className="mb-1.5 flex items-center gap-1.5">
-              <div className="flex size-5 items-center justify-center rounded-full bg-[#5865F2] text-[8px] font-bold">
-                AI
+              <div className="flex size-5 items-center justify-center rounded-full bg-[#5865F2] text-white">
+                <DiscordIcon />
               </div>
               <div className="text-[10px] font-semibold">AI Fuňe</div>
             </div>

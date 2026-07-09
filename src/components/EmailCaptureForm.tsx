@@ -145,7 +145,7 @@ export function EmailCaptureForm({
             )}
           </Button>
         </div>
-        <p className="mt-1.5 text-center text-[10px] leading-snug text-muted/70 sm:text-left">
+        <p className="mt-1.5 text-center text-xs leading-snug text-muted/70 sm:text-left">
           {CONSENT_TEXT}
         </p>
         <p className="sr-only">{LEGAL_FINE_PRINT}</p>

@@ -17,5 +17,29 @@
     <xhtml:link rel="alternate" hreflang="sk-SK" href="https://www.aifune.sk/olympics" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aifune.sk/olympics" />
   </url>
+  <url>
+    <loc>https://www.aifune.sk/obchodne-podmienky</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="sk-SK" href="https://www.aifune.sk/obchodne-podmienky" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aifune.sk/obchodne-podmienky" />
+  </url>
+  <url>
+    <loc>https://www.aifune.sk/ochrana-osobnych-udajov</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="sk-SK" href="https://www.aifune.sk/ochrana-osobnych-udajov" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aifune.sk/ochrana-osobnych-udajov" />
+  </url>
+  <url>
+    <loc>https://www.aifune.sk/cookies</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="sk-SK" href="https://www.aifune.sk/cookies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aifune.sk/cookies" />
+  </url>
 </urlset>
 

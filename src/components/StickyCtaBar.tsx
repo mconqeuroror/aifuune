@@ -36,9 +36,9 @@ export function StickyCtaBar() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-black/6 glass-header-scrolled px-4 py-3 transition-transform">
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3">
-        <p className="text-sm font-medium text-foreground/85">
+    <div className="glass-header-scrolled safe-bottom fixed inset-x-0 bottom-0 z-50 rounded-t-2xl border-t border-black/6 px-3 pt-3 sm:px-4">
+      <div className="mx-auto flex max-w-3xl flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        <p className="text-center text-xs font-medium text-foreground/85 sm:text-left sm:text-sm">
           Ešte si si nepozrel video?
         </p>
         <Button
@@ -46,7 +46,7 @@ export function StickyCtaBar() {
           onClick={scrollToHero}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          className="shrink-0"
+          className="w-full whitespace-normal sm:w-auto sm:shrink-0 sm:whitespace-nowrap"
         >
           {hovered ? `${STICKY_CTA_LABEL} →` : STICKY_CTA_LABEL}
         </Button>

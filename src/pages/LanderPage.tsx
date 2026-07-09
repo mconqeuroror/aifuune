@@ -1,4 +1,5 @@
 import { Footer } from "@/components/Footer";
+import { AmbientBlobs } from "@/components/AmbientBlobs";
 import { Header } from "@/components/Header";
 import { ScrollCaptureModal } from "@/components/ScrollCaptureModal";
 import { StickyCtaBar } from "@/components/StickyCtaBar";
@@ -16,16 +17,14 @@ export default function LanderPage() {
   return (
     <ConversionProvider>
       <div className="relative min-h-screen bg-background text-foreground">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-20 -top-24 size-80 rounded-full bg-accent/15 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-10 -top-16 size-72 rounded-full bg-cyan-300/20 blur-3xl"
+        <AmbientBlobs
+          blobs={[
+            { className: "left-0 top-0 size-80 -translate-x-1/3 bg-accent/15" },
+            { className: "right-0 top-0 size-72 translate-x-1/4 bg-cyan-300/20" },
+          ]}
         />
         <Header />
-        <main>
+        <main className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-24">
           <HeroSection />
           <ProofCollage />
           <BenefitGrid />

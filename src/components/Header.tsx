@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AppleEmoji } from "@/components/AppleEmoji";
 import { Badge } from "@/components/ui/badge";
 import { IMAGES } from "@/lib/content";
@@ -10,7 +10,14 @@ type HeaderProps = {
 };
 
 export function Header({ olympicsActive = false }: HeaderProps) {
+  const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
+
+  function handleLogoClick() {
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -34,32 +41,42 @@ export function Header({ olympicsActive = false }: HeaderProps) {
   );
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 overflow-hidden transition-all duration-300",
-        scrolled ? "glass-header-scrolled rounded-b-2xl" : "bg-transparent",
-      )}
-    >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link to="/" className="transition-opacity hover:opacity-80">
-          <img
-            src={IMAGES.logo}
-            alt="AI Fuňe"
-            className="h-8 w-auto sm:h-10"
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 overflow-hidden transition-all duration-300 pt-[env(safe-area-inset-top,0px)]",
+          scrolled ? "glass-header-scrolled rounded-b-2xl" : "bg-transparent",
+        )}
+      >
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-3 py-3 sm:px-6">
+          <Link
+            to="/"
+            onClick={handleLogoClick}
+            className="transition-opacity hover:opacity-80"
+          >
+            <img
+              src={IMAGES.logo}
+              alt="AI Fuňe"
+              className="h-8 w-auto sm:h-10"
+            />
+          </Link>
+          {olympicsActive ? olympicsBadge : <Link to="/olympics">{olympicsBadge}</Link>}
+        </div>
+        {scrolled && (
+          <div
+            className={cn(
+              "h-px",
+              olympicsActive
+                ? "bg-gradient-to-r from-transparent via-amber-200/40 to-transparent"
+                : "bg-black/6",
+            )}
           />
-        </Link>
-        {olympicsActive ? olympicsBadge : <Link to="/olympics">{olympicsBadge}</Link>}
-      </div>
-      {scrolled && (
-        <div
-          className={cn(
-            "h-px",
-            olympicsActive
-              ? "bg-gradient-to-r from-transparent via-amber-200/40 to-transparent"
-              : "bg-black/6",
-          )}
-        />
-      )}
-    </header>
+        )}
+      </header>
+      <div
+        aria-hidden
+        className="h-[calc(3.5rem+env(safe-area-inset-top,0px))] shrink-0 sm:h-[calc(4rem+env(safe-area-inset-top,0px))]"
+      />
+    </>
   );
 }

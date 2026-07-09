@@ -43,22 +43,36 @@ export function ScrollCaptureModal() {
     if (converted) setOpen(false);
   }, [converted]);
 
+  useEffect(() => {
+    if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [open]);
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/40 p-4 backdrop-blur-sm sm:items-center">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/40 p-4 backdrop-blur-sm pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))]"
+      onClick={() => setOpen(false)}
+    >
       <div
         role="dialog"
         aria-labelledby="capture-title"
-        className="relative w-full max-w-md rounded-2xl bg-background p-5 shadow-2xl"
+        aria-modal="true"
+        className="relative my-auto w-full max-w-md max-h-[min(85dvh,calc(100dvh-2rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)))] overflow-y-auto rounded-2xl bg-background p-5 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="absolute right-3 top-3 rounded-md p-1 text-muted hover:bg-black/5"
+          className="absolute right-2 top-2 flex size-11 items-center justify-center rounded-lg text-muted hover:bg-black/5"
           aria-label="Zavrieť"
         >
-          <X className="size-4" />
+          <X className="size-5" />
         </button>
         <h2 id="capture-title" className="flex items-center gap-2 pr-8 text-lg font-bold">
           Počkaj! <AppleEmoji name="raised-hand" size={22} />
@@ -73,7 +87,7 @@ export function ScrollCaptureModal() {
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="mt-3 w-full text-center text-xs text-muted hover:text-foreground"
+          className="mt-3 min-h-11 w-full text-center text-xs text-muted hover:text-foreground"
         >
           Možno neskôr
         </button>

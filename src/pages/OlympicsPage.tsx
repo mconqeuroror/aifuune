@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AppleEmoji } from "@/components/AppleEmoji";
 import { AnimatedMoney } from "@/components/AnimatedMoney";
+import { AmbientBlobs } from "@/components/AmbientBlobs";
 import { Header } from "@/components/Header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { EmojiName } from "@/lib/emoji-icons";
@@ -69,12 +70,12 @@ function LeaderboardRow({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.04 }}
       className={cn(
-        "glass group grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl px-3 py-3 transition-colors sm:grid-cols-[3.25rem_1fr_7rem_5.5rem] sm:gap-4 sm:px-4 sm:py-3.5",
+        "glass group grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center gap-x-2.5 gap-y-1 rounded-xl px-3 py-3 transition-colors sm:grid-cols-[3.25rem_1fr_7rem_5.5rem] sm:grid-rows-1 sm:gap-4 sm:rounded-2xl sm:px-4 sm:py-3.5",
         style.row,
         isPodium && "sm:py-4",
       )}
     >
-      <div className="flex items-center gap-2">
+      <div className="col-start-1 row-start-1 flex items-center self-center">
         <div
           className={cn(
             "flex size-9 items-center justify-center rounded-full text-sm font-bold sm:size-10",
@@ -85,7 +86,7 @@ function LeaderboardRow({
         </div>
       </div>
 
-      <div className="flex min-w-0 items-center gap-3">
+      <div className="col-start-2 row-start-1 flex min-w-0 items-center gap-2.5 sm:col-start-2 sm:gap-3">
         <div className="relative shrink-0">
           {entry.rank === 1 && (
             <AppleEmoji
@@ -116,7 +117,7 @@ function LeaderboardRow({
       <AnimatedMoney
         amount={entry.performance}
         rank={entry.rank}
-        className="block w-full text-right font-display text-base font-bold text-money sm:col-start-3"
+        className="col-start-2 row-start-2 block w-full text-right font-display text-sm font-bold text-money sm:col-start-3 sm:row-start-1 sm:text-base"
       />
 
       <div
@@ -170,22 +171,20 @@ function SidebarRankItem({
 export default function OlympicsPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-32 -top-24 size-[28rem] rounded-full bg-amber-200/30 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-24 top-0 size-96 rounded-full bg-accent/15 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 left-1/2 size-[32rem] -translate-x-1/2 rounded-full bg-amber-100/20 blur-3xl"
+      <AmbientBlobs
+        blobs={[
+          { className: "left-0 top-0 size-[28rem] -translate-x-1/3 bg-amber-200/30" },
+          { className: "right-0 top-0 size-96 translate-x-1/4 bg-accent/15" },
+          {
+            className:
+              "bottom-0 left-1/2 size-[32rem] -translate-x-1/2 translate-y-1/3 bg-amber-100/20",
+          },
+        ]}
       />
 
       <Header olympicsActive />
 
-      <main className="relative mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+      <main className="relative mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -195,7 +194,7 @@ export default function OlympicsPage() {
             <AppleEmoji name="trophy" size={16} />
             Live leaderboard
           </div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          <h1 className="text-[1.65rem] font-bold leading-tight tracking-tight sm:text-4xl">
             AI Fuňe{" "}
             <span className="text-gold-gradient font-display">Olympics</span>
           </h1>
@@ -207,18 +206,18 @@ export default function OlympicsPage() {
             <button
               type="button"
               title={OLYMPICS_PREV_MONTH}
-              className="flex size-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-white/60 hover:text-accent"
+              className="flex size-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-white/60 hover:text-accent"
               aria-label={OLYMPICS_PREV_MONTH}
             >
               <ChevronLeft className="size-4" />
             </button>
-            <p className="min-w-[10rem] px-2 text-sm font-semibold text-accent sm:text-base">
+            <p className="min-w-0 px-1 text-sm font-semibold text-accent sm:min-w-[10rem] sm:px-2 sm:text-base">
               {OLYMPICS_MONTH}
             </p>
             <button
               type="button"
               disabled
-              className="flex size-9 cursor-not-allowed items-center justify-center rounded-full text-muted/25"
+              className="flex size-11 cursor-not-allowed items-center justify-center rounded-full text-muted/25"
               aria-label="Next month"
             >
               <ChevronRight className="size-4" />
@@ -227,7 +226,7 @@ export default function OlympicsPage() {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px] lg:gap-8">
-          <section className="glass rounded-3xl p-4 sm:p-5">
+          <section className="glass order-2 rounded-2xl p-3 sm:order-1 sm:rounded-3xl sm:p-5 lg:order-1">
             <div className="mb-4 hidden grid-cols-[3.25rem_1fr_7rem_5.5rem] gap-4 border-b border-black/5 px-4 pb-3 text-[11px] font-semibold uppercase tracking-wider text-muted sm:grid">
               <span>Rank</span>
               <span>Name</span>
@@ -241,7 +240,7 @@ export default function OlympicsPage() {
             </div>
           </section>
 
-          <aside className="space-y-4">
+          <aside className="order-1 space-y-4 lg:order-2">
             <motion.div
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}

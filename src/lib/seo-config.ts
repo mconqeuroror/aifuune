@@ -1,5 +1,6 @@
 import { FAQ_ITEMS } from "@/lib/content";
 import { assetUrl } from "@/lib/asset-base";
+import { LEGAL_DOCUMENTS } from "@/lib/legal";
 
 export const SITE = {
   name: "AI Fuňe",
@@ -92,6 +93,19 @@ export function getOgImageUrl(imagePath = SITE.defaultOgImage): string {
 
 const OLYMPICS_DESCRIPTION =
   "Fune Olympics — mesačný rebríček najlepších AI fuňa tvorcov v komunite AI Fuňe. Sleduj výsledky, porovnaj zárobky a inšpiruj sa top performerami.";
+
+const LEGAL_SEO_PAGES = Object.fromEntries(
+  LEGAL_DOCUMENTS.map((doc) => [
+    doc.path,
+    {
+      path: doc.path,
+      title: `${doc.title} | AI Fuňe`,
+      description: doc.description,
+      keywords: [doc.title, SITE.name, "Slovensko", "právne informácie"],
+      ogType: "website" as const,
+    },
+  ]),
+) as Record<string, SeoPageConfig>;
 
 export const SEO_PAGES: Record<string, SeoPageConfig> = {
   "/": {
@@ -224,6 +238,7 @@ export const SEO_PAGES: Record<string, SeoPageConfig> = {
       },
     ],
   },
+  ...LEGAL_SEO_PAGES,
 };
 
 export function getSeoForPath(pathname: string): SeoPageConfig {

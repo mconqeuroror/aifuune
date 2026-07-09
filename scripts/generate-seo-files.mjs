@@ -58,6 +58,30 @@ const ROUTES = [
     description:
       "Fune Olympics — mesačný rebríček najlepších AI fuňa tvorcov v komunite AI Fuňe. Sleduj výsledky, porovnaj zárobky a inšpiruj sa top performerami.",
   },
+  {
+    path: "/obchodne-podmienky",
+    priority: "0.3",
+    changefreq: "yearly",
+    title: "Obchodné podmienky | AI Fuňe",
+    description:
+      "Všeobecné obchodné podmienky AI Fuňe pre predaj digitálnych produktov online.",
+  },
+  {
+    path: "/ochrana-osobnych-udajov",
+    priority: "0.3",
+    changefreq: "yearly",
+    title: "Ochrana osobných údajov | AI Fuňe",
+    description:
+      "Zásady ochrany osobných údajov AI Fuňe v súlade s GDPR a zákonom č. 18/2018 Z. z.",
+  },
+  {
+    path: "/cookies",
+    priority: "0.3",
+    changefreq: "yearly",
+    title: "Cookies | AI Fuňe",
+    description:
+      "Zásady používania cookies na webovej stránke AI Fuňe — typy cookies, právne základy a správa súhlasu.",
+  },
 ];
 
 function abs(path) {
