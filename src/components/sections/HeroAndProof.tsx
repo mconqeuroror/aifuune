@@ -5,6 +5,7 @@ import { DiscordIcon } from "@/components/DiscordIcon";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { HERO_PROOF_CARDS, IMAGES } from "@/lib/content";
 import { assetUrl } from "@/lib/asset-base";
+import { cn } from "@/lib/utils";
 
 export function HeroSection() {
   return (
@@ -78,10 +79,14 @@ function HeroProofStrip() {
         1300+ členov · Online teraz · posledný sa pridal pred 10 min
       </p>
       <div className="grid grid-cols-2 gap-2 min-[480px]:grid-cols-3 sm:gap-3">
-        {HERO_PROOF_CARDS.map((card) => (
+        {HERO_PROOF_CARDS.map((card, index) => (
           <div
             key={card.src}
-            className="overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8"
+            className={cn(
+              "overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8",
+              index === 2 &&
+                "col-span-2 w-[calc((100%-0.5rem)/2)] justify-self-center min-[480px]:col-span-1 min-[480px]:w-auto min-[480px]:justify-self-stretch",
+            )}
           >
             <img
               src={card.src}
