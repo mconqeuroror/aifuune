@@ -4,6 +4,7 @@ dist
 *.log
 .env
 .env.*
+!.env.example
 tsconfig.tsbuildinfo
 olympics-*.txt
 *-extract-log.txt
