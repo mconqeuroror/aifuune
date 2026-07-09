@@ -62,8 +62,8 @@ export function HeroSection() {
             src={IMAGES.aiExpert}
             width={320}
             height={427}
-            rotateClassName="-rotate-6 md:origin-bottom-right"
-            className="bottom-0 left-0 z-0 h-[7.5rem] w-[6.5rem] sm:h-36 sm:w-[8.25rem] md:left-1/2 md:h-[8.75rem] md:w-[8.25rem] md:-translate-x-[11.75rem]"
+            rotateClassName="-rotate-6 origin-bottom-right"
+            className="bottom-0 left-1/2 z-0 h-[7.5rem] w-[6.5rem] -translate-x-[9.375rem] sm:h-36 sm:w-[8.25rem] sm:-translate-x-[11.75rem] md:h-[8.75rem] md:w-[8.25rem]"
           />
           <HeroDecorImage
             src={IMAGES.heroFerrariSelfie}
@@ -78,7 +78,7 @@ export function HeroSection() {
             height={180}
             objectPosition="object-[8%_28%] sm:object-[7%_26%] md:object-[6%_24%]"
             rotateClassName="origin-bottom-left rotate-4 sm:rotate-5 md:rotate-6"
-            className="bottom-0 right-0 z-0 h-[7.25rem] w-[8rem] sm:right-1 sm:h-[8.75rem] sm:w-[10.75rem] md:left-1/2 md:right-auto md:h-[8.75rem] md:w-[10.25rem] md:translate-x-[3.25rem]"
+            className="bottom-0 left-1/2 z-0 h-[7.25rem] w-[8rem] translate-x-[2.875rem] sm:h-[8.75rem] sm:w-[10.75rem] sm:translate-x-[3.5rem] md:h-[8.75rem] md:w-[10.25rem] md:translate-x-[3.25rem]"
           />
         </motion.div>
 
