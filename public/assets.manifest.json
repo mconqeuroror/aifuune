@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-09T08:02:32.733Z",
-  "count": 126,
+  "generatedAt": "2026-07-09T09:16:15.653Z",
+  "count": 128,
   "files": [
     "ai.txt",
     "emojis/apple/chart-up.png",
@@ -75,6 +75,7 @@
     "images/all-b64-7.png",
     "images/all-b64-8.png",
     "images/all-b64-9.png",
+    "images/hero-ferrari-selfie.png",
     "images/inline-12-Výsledok-10.png",
     "images/inline-13-Výsledok-11.png",
     "images/inline-14-Výsledok-12.png",
@@ -126,6 +127,7 @@
     "llms-full.txt",
     "llms.txt",
     "robots.txt",
+    "seo-preview.html",
     "site.webmanifest",
     "sitemap.xml"
   ]

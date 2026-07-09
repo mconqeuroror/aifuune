@@ -11,9 +11,39 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden px-3 pb-4 pt-2 sm:px-6 sm:pb-8 sm:pt-4"
+      className="relative isolate flex min-h-[calc(100svh-env(safe-area-inset-top,0px)-3.5rem)] flex-col justify-center overflow-hidden px-3 py-4 sm:min-h-[calc(100svh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6"
     >
-      <div className="relative mx-auto max-w-3xl text-center">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-[calc(50%-10.5rem)] z-[1] mx-auto h-40 max-w-4xl [mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)] sm:top-[calc(50%-12rem)] sm:h-48 md:h-52"
+        aria-hidden
+      >
+        <img
+          src={IMAGES.aiExpert}
+          alt=""
+          width={320}
+          height={427}
+          decoding="async"
+          className="absolute bottom-0 left-[4%] w-[7rem] -rotate-6 rounded-xl object-cover shadow-xl ring-2 ring-white/60 sm:left-[6%] sm:w-[8.5rem] md:w-36"
+        />
+        <img
+          src={IMAGES.heroFerrariSelfie}
+          alt=""
+          width={400}
+          height={400}
+          decoding="async"
+          className="absolute bottom-1 left-1/2 z-[1] w-[6.5rem] -translate-x-1/2 rounded-xl object-cover shadow-xl ring-2 ring-white/60 sm:w-28 md:w-32"
+        />
+        <img
+          src={IMAGES.heroBgResult}
+          alt=""
+          width={400}
+          height={180}
+          decoding="async"
+          className="absolute bottom-0 right-[4%] w-[7.5rem] rotate-6 rounded-xl object-cover shadow-xl ring-2 ring-white/60 sm:right-[6%] sm:w-[9rem] md:w-40"
+        />
+      </div>
+
+      <div className="relative z-[2] mx-auto w-full max-w-3xl text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,20 +90,40 @@ export function HeroSection() {
             iPhone 17 Pro, 500 € a týždeň koučingu so mnou.
           </span>
         </motion.p>
-
-        <HeroProofStrip />
       </div>
     </section>
   );
 }
 
-function HeroProofStrip() {
+export function MemberResultsSection() {
+  return (
+    <section id="vysledky-clenov" className="px-3 py-8 sm:px-6 sm:py-12">
+      <div className="mx-auto max-w-3xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-6 text-center text-2xl font-bold sm:mb-8 sm:text-3xl"
+        >
+          Výsledky členov
+        </motion.h2>
+
+        <MemberResultsGrid />
+      </div>
+
+      <ProofCollage />
+    </section>
+  );
+}
+
+function MemberResultsGrid() {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.16 }}
-      className="mt-5 text-left sm:mt-6"
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5 }}
+      className="text-left"
     >
       <p className="mb-2.5 text-center text-xs font-medium text-muted">
         1300+ členov · Online teraz · posledný sa pridal pred 10 min
@@ -105,7 +155,7 @@ function HeroProofStrip() {
 }
 
 export function ProofCollage() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -115,7 +165,7 @@ export function ProofCollage() {
   const y3 = useTransform(scrollYProgress, [0, 1], [15, -25]);
 
   return (
-    <section ref={ref} className="relative px-4 py-8 sm:px-6 sm:py-14">
+    <div ref={ref} className="relative px-4 py-8 sm:px-6 sm:py-14">
       <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -200,6 +250,6 @@ export function ProofCollage() {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

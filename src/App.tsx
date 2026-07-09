@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { CookieConsent } from "@/components/CookieConsent";
 import { SeoHead } from "@/components/SeoHead";
 import LegalPage from "@/pages/LegalPage";
 import LanderPage from "@/pages/LanderPage";
@@ -10,6 +11,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <SeoHead />
+      <CookieConsent />
       <Routes>
         <Route path="/" element={<LanderPage />} />
         <Route path="/olympics" element={<OlympicsPage />} />

@@ -146,5 +146,7 @@ export const IMAGES = {
   proofSupport2: assetUrl("/images/all-b64-7.png"),
   proofSupport3: assetUrl("/images/all-b64-8.png"),
   aiExpert: assetUrl("/images/all-b64-3.jpg"),
+  heroFerrariSelfie: assetUrl("/images/hero-ferrari-selfie.png"),
+  heroBgResult: assetUrl("/images/all-b64-20.png"),
   earningsProof: assetUrl("/images/all-b64-21.png"),
 };

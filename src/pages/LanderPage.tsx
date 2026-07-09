@@ -9,7 +9,7 @@ import {
 } from "@/components/sections/BenefitsAndCapture";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FounderStory } from "@/components/sections/FounderStory";
-import { HeroSection, ProofCollage } from "@/components/sections/HeroAndProof";
+import { HeroSection, MemberResultsSection } from "@/components/sections/HeroAndProof";
 import { SocialProofWall } from "@/components/sections/SocialProofWall";
 import { ConversionProvider } from "@/lib/conversion-context";
 
@@ -19,14 +19,14 @@ export default function LanderPage() {
       <div className="relative min-h-screen bg-background text-foreground">
         <AmbientBlobs
           blobs={[
-            { className: "left-0 top-0 size-80 -translate-x-1/3 bg-accent/15" },
-            { className: "right-0 top-0 size-72 translate-x-1/4 bg-cyan-300/20" },
+            { className: "left-0 top-[55%] size-80 -translate-x-1/3 bg-accent/12" },
+            { className: "right-0 top-[50%] size-72 translate-x-1/4 bg-cyan-300/15" },
           ]}
         />
         <Header />
         <main className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-24">
           <HeroSection />
-          <ProofCollage />
+          <MemberResultsSection />
           <BenefitGrid />
           <EmailCaptureSection />
           <FounderStory />
