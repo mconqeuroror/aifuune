@@ -7,72 +7,105 @@ import { HERO_PROOF_CARDS, IMAGES } from "@/lib/content";
 import { assetUrl } from "@/lib/asset-base";
 import { cn } from "@/lib/utils";
 
+function HeroDecorImage({
+  src,
+  width,
+  height,
+  className,
+  objectPosition = "object-center",
+  rotateClassName,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  className?: string;
+  objectPosition?: string;
+  rotateClassName?: string;
+}) {
+  return (
+    <div className={cn("absolute", rotateClassName, className)}>
+      <div className="size-full overflow-hidden rounded-2xl shadow-xl">
+        <img
+          src={src}
+          alt=""
+          width={width}
+          height={height}
+          decoding="async"
+          className={cn("size-full object-cover", objectPosition)}
+        />
+      </div>
+    </div>
+  );
+}
+
 export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-[calc(100svh-env(safe-area-inset-top,0px)-3.5rem)] flex-col justify-center overflow-hidden px-3 py-4 sm:min-h-[calc(100svh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6"
+      className="relative isolate flex min-h-[calc(100svh-env(safe-area-inset-top,0px)-3.5rem)] flex-col justify-center px-3 py-4 sm:min-h-[calc(100svh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6"
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-[calc(50%-10.5rem)] z-[1] mx-auto h-40 max-w-4xl [mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)] sm:top-[calc(50%-12rem)] sm:h-48 md:h-52"
-        aria-hidden
-      >
-        <img
-          src={IMAGES.aiExpert}
-          alt=""
-          width={320}
-          height={427}
-          decoding="async"
-          className="absolute bottom-0 left-[4%] w-[7rem] -rotate-6 rounded-xl object-cover shadow-xl ring-2 ring-white/60 sm:left-[6%] sm:w-[8.5rem] md:w-36"
-        />
-        <img
-          src={IMAGES.heroFerrariSelfie}
-          alt=""
-          width={400}
-          height={400}
-          decoding="async"
-          className="absolute bottom-1 left-1/2 z-[1] w-[6.5rem] -translate-x-1/2 rounded-xl object-cover shadow-xl ring-2 ring-white/60 sm:w-28 md:w-32"
-        />
-        <img
-          src={IMAGES.heroBgResult}
-          alt=""
-          width={400}
-          height={180}
-          decoding="async"
-          className="absolute bottom-0 right-[4%] w-[7.5rem] rotate-6 rounded-xl object-cover shadow-xl ring-2 ring-white/60 sm:right-[6%] sm:w-[9rem] md:w-40"
-        />
-      </div>
-
-      <div className="relative z-[2] mx-auto w-full max-w-3xl text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+      <div className="relative mx-auto w-full max-w-3xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-          className="pt-2 text-[1.75rem] font-bold leading-[1.15] tracking-tight sm:pt-4 sm:text-4xl md:text-[2.85rem]"
+          transition={{ duration: 0.5 }}
+          className="relative mx-auto mb-3 h-44 w-full max-w-sm overflow-visible sm:mb-4 sm:h-52 sm:max-w-md md:h-56 md:max-w-xl"
+          aria-hidden
         >
-          Ako zarobiť{" "}
-          <span className="font-display font-bold text-money text-money-glow">
-            10 000 €+ mesačne
-          </span>{" "}
-          s AI fuňami
-        </motion.h1>
+          <HeroDecorImage
+            src={IMAGES.aiExpert}
+            width={320}
+            height={427}
+            rotateClassName="-rotate-6"
+            className="bottom-0 left-0 z-0 h-[7.5rem] w-[6.5rem] sm:h-36 sm:w-[8.25rem] md:h-40 md:w-36"
+          />
+          <HeroDecorImage
+            src={IMAGES.heroFerrariSelfie}
+            width={400}
+            height={400}
+            className="bottom-0 left-1/2 z-10 h-[11rem] w-[8.25rem] -translate-x-1/2 sm:h-[13.5rem] sm:w-40 md:h-60 md:w-44"
+          />
+          <HeroDecorImage
+            src={IMAGES.heroBgResult}
+            width={400}
+            height={180}
+            objectPosition="object-[18%_30%] sm:object-[16%_28%] md:object-[14%_26%]"
+            rotateClassName="origin-bottom-right rotate-6"
+            className="bottom-0 right-0 z-0 h-[7rem] w-[7.5rem] sm:right-2 sm:h-[8.75rem] sm:w-[10.5rem] md:right-4 md:h-36 md:w-48"
+          />
+        </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.05 }}
-          className="mt-3 text-xs leading-relaxed text-foreground/80 sm:text-sm"
-        >
-          Ukážem ti presný postup. Od nuly až po prvé peniaze.
-          <br />
-          Celé zadarmo, žiadny háčik.
-        </motion.p>
+        <div className="overflow-visible pt-2 sm:pt-4">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="overflow-visible px-1 text-[1.75rem] font-bold leading-[1.15] tracking-tight sm:px-2 sm:text-4xl md:text-[2.85rem]"
+          >
+            Ako zarobiť{" "}
+            <span className="font-display inline-block pl-1.5 pr-0.5 font-bold tracking-normal text-money text-money-glow">
+              10 000 €+ mesačne
+            </span>{" "}
+            s AI fuňami
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.05 }}
+            className="mt-3 text-xs leading-relaxed text-foreground/80 sm:text-sm"
+          >
+            Ukážem ti presný postup. Od nuly až po prvé peniaze.
+            <br />
+            Celé zadarmo, žiadny háčik.
+          </motion.p>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="mt-5"
+          className="relative mt-5"
         >
           <EmailCaptureForm />
         </motion.div>

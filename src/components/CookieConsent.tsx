@@ -35,10 +35,10 @@ export function CookieConsent() {
           transition={{ duration: 0.35 }}
           role="dialog"
           aria-label="Súhlas s cookies"
-          className="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] z-[55] sm:inset-x-auto sm:right-4 sm:max-w-sm"
+          className="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] z-[55] sm:inset-x-auto sm:right-4 sm:max-w-[15.5rem]"
         >
-          <div className="rounded-xl border border-black/10 bg-white/95 px-3.5 py-3 shadow-xl shadow-black/10 backdrop-blur-sm">
-            <p className="text-xs leading-relaxed text-foreground/85 sm:text-[13px]">
+          <div className="flex flex-col gap-1.5 rounded-2xl border border-black/10 bg-white/95 px-2.5 py-2 shadow-md shadow-black/8 backdrop-blur-sm sm:flex-row sm:items-center sm:gap-2">
+            <p className="text-[10px] leading-snug text-foreground/80 sm:text-[11px]">
               Používame cookies na fungovanie stránky a analytiku.{" "}
               <Link
                 to="/cookies"
@@ -47,7 +47,10 @@ export function CookieConsent() {
                 Viac info
               </Link>
             </p>
-            <Button onClick={accept} className="mt-2.5 h-9 w-full text-xs sm:text-sm">
+            <Button
+              onClick={accept}
+              className="h-6 shrink-0 rounded-lg px-2.5 text-[10px] sm:h-7 sm:px-3 sm:text-[11px]"
+            >
               Súhlasím
             </Button>
           </div>

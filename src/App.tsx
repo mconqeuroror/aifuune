@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { CookieConsent } from "@/components/CookieConsent";
 import { SeoHead } from "@/components/SeoHead";
@@ -12,6 +13,7 @@ export default function App() {
       <ScrollToTop />
       <SeoHead />
       <CookieConsent />
+      <Analytics />
       <Routes>
         <Route path="/" element={<LanderPage />} />
         <Route path="/olympics" element={<OlympicsPage />} />

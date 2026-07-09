@@ -4,16 +4,45 @@ import { AppleEmoji } from "@/components/AppleEmoji";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { useConversion } from "@/lib/conversion-context";
 
+const STORAGE_KEY = "aifune-scroll-capture-dismissed";
+const MIN_TIME_ON_PAGE_MS = 60_000;
+
+function isDismissed(): boolean {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === "dismissed";
+  } catch {
+    return false;
+  }
+}
+
 export function ScrollCaptureModal() {
   const { converted } = useConversion();
   const [open, setOpen] = useState(false);
   const triggered = useRef(false);
+  const pageReady = useRef(false);
+
+  function dismiss() {
+    triggered.current = true;
+    try {
+      localStorage.setItem(STORAGE_KEY, "dismissed");
+    } catch {
+      // Private browsing — hide for this session only
+    }
+    setOpen(false);
+  }
 
   useEffect(() => {
-    if (converted) return;
+    if (converted || isDismissed()) return;
+
+    const readyTimer = window.setTimeout(() => {
+      pageReady.current = true;
+    }, MIN_TIME_ON_PAGE_MS);
+
+    const canTrigger = () =>
+      pageReady.current && !triggered.current && !converted && !isDismissed();
 
     const onScroll = () => {
-      if (triggered.current || converted) return;
+      if (!canTrigger()) return;
       const doc = document.documentElement;
       const scrolled =
         doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
@@ -24,7 +53,7 @@ export function ScrollCaptureModal() {
     };
 
     const onMouseLeave = (e: MouseEvent) => {
-      if (triggered.current || converted) return;
+      if (!canTrigger()) return;
       if (e.clientY <= 0) {
         triggered.current = true;
         setOpen(true);
@@ -34,6 +63,7 @@ export function ScrollCaptureModal() {
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
     return () => {
+      window.clearTimeout(readyTimer);
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
@@ -57,7 +87,7 @@ export function ScrollCaptureModal() {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/40 p-4 backdrop-blur-sm pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))]"
-      onClick={() => setOpen(false)}
+      onClick={dismiss}
     >
       <div
         role="dialog"
@@ -68,7 +98,7 @@ export function ScrollCaptureModal() {
       >
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={dismiss}
           className="absolute right-2 top-2 flex size-11 items-center justify-center rounded-lg text-muted hover:bg-black/5"
           aria-label="Zavrieť"
         >
@@ -86,7 +116,7 @@ export function ScrollCaptureModal() {
         </div>
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={dismiss}
           className="mt-3 min-h-11 w-full text-center text-xs text-muted hover:text-foreground"
         >
           Možno neskôr
