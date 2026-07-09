@@ -11,7 +11,7 @@
 
 - **`package.json`**, **`package-lock.json`** — add `@vercel/analytics`
 - **`src/App.tsx`** — mount `<Analytics />` from `@vercel/analytics/react`
-- **`src/components/sections/HeroAndProof.tsx`** — split rotation from clip wrapper so rounded corners and earnings crop work on desktop; remove bottom gradient fade and `ring-2` edge; tune right image object-position/width
+- **`src/components/sections/HeroAndProof.tsx`** — split rotation from clip wrapper so rounded corners and earnings crop work on desktop; remove bottom gradient fade and `ring-2` edge; tune right image object-position/width; center-anchored desktop cluster; outer-wrapper shadows; Ferrari `object-[68%_32%]` for full face; earnings `object-[8%_28%]` for visible `$10,001` digit
 - **`src/components/CookieConsent.tsx`** — smaller compact banner (`max-w-[15.5rem]`, smaller text/button)
 - **`src/components/ScrollCaptureModal.tsx`** — 60s gate before scroll/exit-intent triggers; `localStorage` key `aifune-scroll-capture-dismissed` on close / Možno neskôr
 
@@ -22,5 +22,8 @@ Desktop hero was clipping rotated images and the Discord earnings leading digit;
 ## Gotchas
 
 - Hero rotation must live on an outer wrapper — `overflow-hidden` + `rotate` on the same node clips image content
+- Shadow on outer wrapper, not inner clip box, or `overflow-hidden` eats the shadow
+- Ferrari face sits on the right of the source image — use `object-[68%_*]` not `object-center`
+- Earnings `$10,001.40` needs left-biased object-position (`6–8%`) across breakpoints
 - Full `npm run build` blob upload still CI-only; local verify uses `tsc -b` + `vite build`
 - No ESLint script in repo — typecheck + Vite build used as lint/build gate

@@ -23,8 +23,14 @@ function HeroDecorImage({
   rotateClassName?: string;
 }) {
   return (
-    <div className={cn("absolute", rotateClassName, className)}>
-      <div className="size-full overflow-hidden rounded-2xl shadow-xl">
+    <div
+      className={cn(
+        "absolute rounded-2xl shadow-[0_10px_24px_rgba(0,0,0,0.14)] sm:shadow-[0_14px_32px_rgba(0,0,0,0.16)]",
+        rotateClassName,
+        className,
+      )}
+    >
+      <div className="size-full overflow-hidden rounded-2xl">
         <img
           src={src}
           alt=""
@@ -49,29 +55,30 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative mx-auto mb-3 h-44 w-full max-w-sm overflow-visible sm:mb-4 sm:h-52 sm:max-w-md md:h-56 md:max-w-xl"
+          className="relative mx-auto mb-3 h-44 w-full max-w-sm overflow-visible sm:mb-4 sm:h-52 sm:max-w-md md:h-[17rem] md:max-w-md"
           aria-hidden
         >
           <HeroDecorImage
             src={IMAGES.aiExpert}
             width={320}
             height={427}
-            rotateClassName="-rotate-6"
-            className="bottom-0 left-0 z-0 h-[7.5rem] w-[6.5rem] sm:h-36 sm:w-[8.25rem] md:h-40 md:w-36"
+            rotateClassName="-rotate-6 md:origin-bottom-right"
+            className="bottom-0 left-0 z-0 h-[7.5rem] w-[6.5rem] sm:h-36 sm:w-[8.25rem] md:left-1/2 md:h-[8.75rem] md:w-[8.25rem] md:-translate-x-[11.75rem]"
           />
           <HeroDecorImage
             src={IMAGES.heroFerrariSelfie}
             width={400}
             height={400}
-            className="bottom-0 left-1/2 z-10 h-[11rem] w-[8.25rem] -translate-x-1/2 sm:h-[13.5rem] sm:w-40 md:h-60 md:w-44"
+            objectPosition="object-[68%_32%] sm:object-[66%_30%] md:object-[64%_28%]"
+            className="bottom-0 left-1/2 z-10 h-[11rem] w-[8.25rem] -translate-x-1/2 sm:h-[13.5rem] sm:w-40 md:h-[16.5rem] md:w-[11rem]"
           />
           <HeroDecorImage
             src={IMAGES.heroBgResult}
             width={400}
             height={180}
-            objectPosition="object-[18%_30%] sm:object-[16%_28%] md:object-[14%_26%]"
-            rotateClassName="origin-bottom-right rotate-6"
-            className="bottom-0 right-0 z-0 h-[7rem] w-[7.5rem] sm:right-2 sm:h-[8.75rem] sm:w-[10.5rem] md:right-4 md:h-36 md:w-48"
+            objectPosition="object-[8%_28%] sm:object-[7%_26%] md:object-[6%_24%]"
+            rotateClassName="origin-bottom-left rotate-4 sm:rotate-5 md:rotate-6"
+            className="bottom-0 right-0 z-0 h-[7.25rem] w-[8rem] sm:right-1 sm:h-[8.75rem] sm:w-[10.75rem] md:left-1/2 md:right-auto md:h-[8.75rem] md:w-[10.25rem] md:translate-x-[3.25rem]"
           />
         </motion.div>
 
