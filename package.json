@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/upload-assets-to-blob.mjs && tsc -b && node scripts/generate-seo-files.mjs && vite build",
     "preview": "vite preview",
     "assets:manifest": "node scripts/generate-asset-manifest.mjs",
-    "fonts:download": "python scripts/download-fonts.py"
+    "seo:generate": "node scripts/generate-seo-files.mjs",
+    "blob:upload": "node scripts/upload-assets-to-blob.mjs",
+    "fonts:download": "python scripts/download-fonts.py",
+    "prebuild": "node scripts/generate-seo-files.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",
@@ -27,6 +30,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@vercel/blob": "^2.6.1",
     "@vitejs/plugin-react": "^4.7.0",
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",

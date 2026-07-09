@@ -1,10 +1,12 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { SeoHead } from "@/components/SeoHead";
 import LanderPage from "@/pages/LanderPage";
 import OlympicsPage from "@/pages/OlympicsPage";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <SeoHead />
       <Routes>
         <Route path="/" element={<LanderPage />} />
         <Route path="/olympics" element={<OlympicsPage />} />

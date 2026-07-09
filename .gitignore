@@ -16,4 +16,7 @@ extracted-structure.txt
 bg-images.json
 content.json
 images-manifest.json
-src/lib/olympics-content.json
+public/seo-preview.html
+
+.vercel
+.env*

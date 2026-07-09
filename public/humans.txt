@@ -1,0 +1,16 @@
+/* TEAM */
+Founder: Juraj Olšavský (Mr. Byznys)
+Company: RYO GROUP s.r.o.
+Contact: jorgebyznys@gmail.com
+Phone: +421 940 216 575
+
+/* THANKS */
+Community members featured in social proof and Fune Olympics leaderboard
+
+/* SITE */
+Standards: HTML5, CSS3, Slovak language
+Components: React, Tailwind CSS
+Country: Slovakia
+Language: Slovak
+Last update: 2026-07-09
+

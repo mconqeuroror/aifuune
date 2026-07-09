@@ -20,45 +20,34 @@ npm install
 npm run dev
 ```
 
-## Static assets (blob-ready)
+## Static assets (Vercel Blob)
 
-All static files live under `public/` and are listed in `public/assets.manifest.json` (128 files: images, emojis, fonts).
+Media files (`images/`, `emojis/`, `fonts/`) upload automatically to Vercel Blob on every **Vercel production/preview build** via `scripts/upload-assets-to-blob.mjs`.
 
-| Path | Contents |
-|------|----------|
-| `public/images/` | Lander proof screenshots |
-| `public/images/olympics/` | Olympics hero images |
-| `public/images/olympics/avatars/` | Leaderboard avatars |
-| `public/emojis/apple/` | Self-hosted Apple emoji PNGs |
-| `public/fonts/` | Self-hosted DM Sans + Space Grotesk woff2 |
+| Setting | Value |
+|---------|-------|
+| Blob store | `aifuune-blob` (`store_AnyFloMmV08jxHPm`) |
+| CDN base | `https://anyflommv08jxhpm.public.blob.vercel-storage.com` |
+| Manifest | `src/data/blob-asset-manifest.json` (generated on build) |
 
-Regenerate the manifest after adding assets:
+SEO/crawler files (`robots.txt`, `sitemap.xml`, `llms.txt`, etc.) stay on the Vercel app origin.
 
-```bash
-npm run assets:manifest
-```
-
-Re-download fonts if needed:
+### Vercel env (already configured)
 
 ```bash
-npm run fonts:download
+VITE_ASSET_BASE=https://anyflommv08jxhpm.public.blob.vercel-storage.com
+VITE_SITE_URL=https://aifuune.vercel.app
+BLOB_STORE_ID=store_AnyFloMmV08jxHPm
+BLOB_WEBHOOK_PUBLIC_KEY=...  # webhook verification for client uploads
 ```
 
-## Vercel + Blob deployment
+Local dev leaves `VITE_ASSET_BASE` empty — assets serve from `/public`.
 
-1. Push this repo and connect it on Vercel.
-2. Upload everything under `public/` to your Vercel Blob store, **preserving paths** (e.g. blob key `images/all-b64-0.png`, not a flat folder).
-3. Set the Vercel env var:
+Manual re-upload (requires Vercel OIDC on the environment or `BLOB_READ_WRITE_TOKEN`):
 
-   ```
-   VITE_ASSET_BASE=https://your-account.public.blob.vercel-storage.com/aifune
-   ```
-
-   (no trailing slash)
-
-4. Redeploy. Image, emoji, and font URLs will point at blob; the SPA shell is served from Vercel.
-
-Without `VITE_ASSET_BASE`, assets are served from `/public` on the same origin (fine for local dev and first deploy).
+```bash
+UPLOAD_BLOB_ASSETS=1 npm run blob:upload
+```
 
 ## Build
 
@@ -68,3 +57,41 @@ npm run preview
 ```
 
 `vercel.json` includes SPA rewrites so `/olympics` works on direct navigation.
+
+## SEO
+
+Generated on every build (`prebuild`):
+
+| File | Purpose |
+|------|---------|
+| `public/robots.txt` | Crawler rules + sitemap URL |
+| `public/sitemap.xml` | `/` and `/olympics` with hreflang |
+| `public/llms.txt` | LLM crawler context ([llmstxt.org](https://llmstxt.org)) |
+| `public/llms-full.txt` | Extended FAQ + topics for AI crawlers |
+| `public/ai.txt` | Alias of `llms.txt` |
+| `public/humans.txt` | Team / site credits |
+| `public/site.webmanifest` | PWA manifest |
+
+Per-route meta, Open Graph, Twitter cards, geo tags, canonical URLs, and JSON-LD are injected at runtime via `SeoHead`.
+
+### Required env for production SEO
+
+```bash
+VITE_SITE_URL=https://your-domain.sk   # canonical, sitemap, OG absolute URLs
+```
+
+### Optional env
+
+```bash
+VITE_GOOGLE_SITE_VERIFICATION=...   # Google Search Console
+VITE_BING_SITE_VERIFICATION=...     # Bing Webmaster Tools
+VITE_NOINDEX=true                   # block indexing on staging
+```
+
+After deploy, submit `https://your-domain.sk/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
+
+Regenerate SEO files manually:
+
+```bash
+npm run seo:generate
+```

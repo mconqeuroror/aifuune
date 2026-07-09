@@ -1,0 +1,21 @@
+{
+  "name": "AI Fuňe",
+  "short_name": "AI Fuňe",
+  "description": "Ako zarobiť 10 000 €+ mesačne s AI fuňami — zadarmo video od Mr. Byznys",
+  "lang": "sk",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#0ea5b5",
+  "icons": [
+    {
+      "src": "/images/all-b64-0.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education", "business", "finance"]
+}
