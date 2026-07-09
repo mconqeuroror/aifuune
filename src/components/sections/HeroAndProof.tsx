@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, type PointerEvent } from "react";
+import { useEffect, useRef, type PointerEvent } from "react";
 import { AppleEmoji } from "@/components/AppleEmoji";
 import { DiscordIcon } from "@/components/DiscordIcon";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
+import { ShapeGrid } from "@/components/ShapeGrid";
 import { HERO_PROOF_CARDS, IMAGES } from "@/lib/content";
 import { assetUrl } from "@/lib/asset-base";
 import { cn } from "@/lib/utils";
@@ -48,9 +49,23 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-[calc(100dvh-env(safe-area-inset-top,0px)-3.5rem)] w-full flex-col justify-center px-4 py-4 sm:min-h-[calc(100dvh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6 lg:px-8"
+      className="relative isolate flex min-h-[calc(100dvh-env(safe-area-inset-top,0px)-3.5rem)] w-full flex-col justify-center overflow-hidden px-4 py-4 sm:min-h-[calc(100dvh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6 lg:px-8"
     >
-      <div className="relative w-full text-center">
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-45 sm:opacity-50">
+        <ShapeGrid
+          speed={0.37}
+          squareSize={47}
+          direction="up"
+          borderColor="#5ef0ff"
+          hoverFillColor="#222"
+          shape="square"
+          hoverTrailAmount={0}
+          className="size-full"
+        />
+      </div>
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background/20 via-background/55 to-background" />
+
+      <div className="relative z-10 w-full text-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,7 +123,7 @@ export function HeroSection() {
           </motion.p>
         </div>
 
-        <div className="mx-auto mt-5 w-full max-w-xl">
+        <div className="mx-auto mt-5 w-full max-w-[43.2rem]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -138,19 +153,22 @@ export function HeroSection() {
 
 export function MemberResultsSection() {
   return (
-    <section id="vysledky-clenov" className="w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <div className="mx-auto w-full max-w-xl">
+    <section id="vysledky-clenov" className="w-full py-8 sm:py-12">
+      <div className="mx-auto w-full max-w-[43.2rem] px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-6 text-center text-2xl font-bold sm:mb-8 sm:text-3xl"
+          className="mb-2.5 text-center text-2xl font-bold sm:mb-3 sm:text-3xl"
         >
           Výsledky členov
         </motion.h2>
-
-        <MemberResultsSlider />
+        <p className="mb-6 text-center text-xs font-medium text-muted sm:mb-8">
+          1300+ členov · Online teraz · posledný sa pridal pred 10 min
+        </p>
       </div>
+
+      <MemberResultsSlider />
 
       <ProofCollage />
     </section>
@@ -160,6 +178,41 @@ export function MemberResultsSection() {
 function MemberResultsSlider() {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const segmentWidthRef = useRef(0);
+  const loopCards = [...HERO_PROOF_CARDS, ...HERO_PROOF_CARDS, ...HERO_PROOF_CARDS];
+
+  function normalizeScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const segmentWidth = segmentWidthRef.current;
+    if (!segmentWidth) return;
+
+    if (track.scrollLeft <= segmentWidth * 0.5) {
+      track.scrollLeft += segmentWidth;
+    } else if (track.scrollLeft >= segmentWidth * 1.5) {
+      track.scrollLeft -= segmentWidth;
+    }
+  }
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const init = () => {
+      segmentWidthRef.current = track.scrollWidth / 3;
+      track.scrollLeft = segmentWidthRef.current;
+    };
+
+    init();
+    const observer = new ResizeObserver(init);
+    observer.observe(track);
+
+    track.addEventListener("scroll", normalizeScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      track.removeEventListener("scroll", normalizeScroll);
+    };
+  }, []);
 
   function onPointerDown(event: PointerEvent<HTMLDivElement>) {
     const track = trackRef.current;
@@ -185,6 +238,7 @@ function MemberResultsSlider() {
     if (!track || !dragState.current.active) return;
     dragState.current.active = false;
     track.releasePointerCapture(event.pointerId);
+    normalizeScroll();
   }
 
   return (
@@ -193,23 +247,20 @@ function MemberResultsSlider() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5 }}
-      className="text-left"
+      className="w-full"
     >
-      <p className="mb-2.5 text-center text-xs font-medium text-muted">
-        1300+ členov · Online teraz · posledný sa pridal pred 10 min
-      </p>
       <div
         ref={trackRef}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        className="flex cursor-grab gap-3 overflow-x-auto pb-2 active:cursor-grabbing snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex w-full cursor-grab gap-3 overflow-x-auto px-4 pb-2 active:cursor-grabbing [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:px-6 lg:px-8"
       >
-        {HERO_PROOF_CARDS.map((card) => (
+        {loopCards.map((card, index) => (
           <div
-            key={card.src}
-            className="w-40 shrink-0 snap-start overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8 sm:w-44"
+            key={`${card.src}-${index}`}
+            className="w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8 sm:w-44"
           >
             <img
               src={card.src}
@@ -255,50 +306,70 @@ export function ProofCollage() {
             Tatiana M. sa práve pridala <AppleEmoji name="wave" size={16} />
           </motion.div>
 
-          <motion.img
+          <motion.div
             style={{ y: y2 }}
-            src={IMAGES.aiExpert}
-            alt="AI Expert"
-            loading="lazy"
-            decoding="async"
-            className="absolute left-[8%] top-[12%] z-10 w-[42%] rounded-2xl object-cover shadow-2xl ring-2 ring-white/60 sm:w-[38%]"
-          />
+            className="absolute left-[8%] top-[12%] z-10 w-[42%] sm:w-[38%]"
+          >
+            <img
+              src={IMAGES.aiExpert}
+              alt="AI Expert"
+              loading="lazy"
+              decoding="async"
+              className="w-full rounded-2xl object-cover shadow-2xl ring-2 ring-white/60"
+            />
+          </motion.div>
 
-          <motion.img
+          <motion.div
             style={{ y: y3 }}
-            src={IMAGES.proofSupport1}
-            alt="Výsledok 1"
-            loading="lazy"
-            decoding="async"
-            className="absolute right-[6%] top-[8%] z-20 w-[34%] rounded-xl object-cover shadow-xl ring-1 ring-white/50"
-          />
+            className="absolute right-[6%] top-[8%] z-20 w-[34%]"
+          >
+            <img
+              src={IMAGES.proofSupport1}
+              alt="Výsledok 1"
+              loading="lazy"
+              decoding="async"
+              className="w-full rounded-xl object-cover shadow-xl ring-1 ring-white/50"
+            />
+          </motion.div>
 
-          <motion.img
+          <motion.div
             style={{ y: y1 }}
-            src={IMAGES.proofSupport3}
-            alt="Výsledok 2"
-            loading="lazy"
-            decoding="async"
-            className="absolute bottom-[10%] left-[4%] z-20 w-[30%] rounded-xl object-cover shadow-xl ring-1 ring-white/50"
-          />
+            className="absolute bottom-[10%] left-[4%] z-20 w-[30%]"
+          >
+            <img
+              src={IMAGES.proofSupport3}
+              alt="Výsledok 2"
+              loading="lazy"
+              decoding="async"
+              className="w-full rounded-xl object-cover shadow-xl ring-1 ring-white/50"
+            />
+          </motion.div>
 
-          <motion.img
+          <motion.div
             style={{ y: y2 }}
-            src={assetUrl("/images/all-b64-14.png")}
-            alt="Výsledok 3"
-            loading="lazy"
-            decoding="async"
-            className="absolute bottom-[16%] right-[20%] z-20 w-[42%] rounded-xl object-cover shadow-lg ring-1 ring-white/40 sm:bottom-[10%] sm:right-[10%] sm:w-[28%]"
-          />
+            className="absolute bottom-[16%] right-[20%] z-20 w-[42%] sm:bottom-[10%] sm:right-[10%] sm:w-[28%]"
+          >
+            <img
+              src={assetUrl("/images/all-b64-14.png")}
+              alt="Výsledok 3"
+              loading="lazy"
+              decoding="async"
+              className="w-full rounded-xl object-cover shadow-lg ring-1 ring-white/40"
+            />
+          </motion.div>
 
-          <motion.img
+          <motion.div
             style={{ y: y3 }}
-            src={IMAGES.earningsProof}
-            alt="Earnings dashboard"
-            loading="lazy"
-            decoding="async"
-            className="absolute left-[28%] top-[26%] z-40 w-[46%] rounded-xl object-cover shadow-2xl ring-1 ring-white/10"
-          />
+            className="absolute left-[28%] top-[26%] z-40 w-[46%]"
+          >
+            <img
+              src={IMAGES.earningsProof}
+              alt="Earnings dashboard"
+              loading="lazy"
+              decoding="async"
+              className="w-full rounded-xl object-cover shadow-2xl ring-1 ring-white/10"
+            />
+          </motion.div>
 
           <motion.div
             style={{ y: y1 }}

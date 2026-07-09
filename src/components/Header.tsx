@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils";
 
 type HeaderProps = {
   olympicsActive?: boolean;
+  olympicsDark?: boolean;
 };
 
-export function Header({ olympicsActive = false }: HeaderProps) {
+export function Header({ olympicsActive = false, olympicsDark = false }: HeaderProps) {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -31,7 +32,9 @@ export function Header({ olympicsActive = false }: HeaderProps) {
       className={cn(
         "gap-1.5 px-3 py-1.5 text-xs sm:text-sm",
         olympicsActive
-          ? "border-amber-200/50 bg-amber-50/80 text-amber-800"
+          ? olympicsDark
+            ? "border-amber-400/30 bg-amber-400/10 text-amber-200"
+            : "border-amber-200/50 bg-amber-50/80 text-amber-800"
           : "cursor-pointer hover:bg-accent/15 transition-colors",
       )}
     >
@@ -45,7 +48,11 @@ export function Header({ olympicsActive = false }: HeaderProps) {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 overflow-hidden transition-all duration-300 pt-[env(safe-area-inset-top,0px)]",
-          scrolled ? "glass-header-scrolled rounded-b-2xl" : "bg-transparent",
+          scrolled
+            ? olympicsDark
+              ? "glass-header-olympics-scrolled rounded-b-2xl"
+              : "glass-header-scrolled rounded-b-2xl"
+            : "bg-transparent",
         )}
       >
         <div className="flex w-full items-center justify-between px-4 py-3 sm:px-6 lg:px-8">

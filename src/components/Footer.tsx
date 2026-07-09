@@ -3,7 +3,7 @@ import { IMAGES } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-black/6 bg-background px-4 py-12 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] sm:px-6 lg:px-8">
+    <footer className="w-full rounded-t-[2.5rem] bg-gradient-to-b from-[#5ef0ff]/30 via-[#5ef0ff]/12 to-background px-4 py-12 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] sm:rounded-t-[3rem] sm:px-6 lg:px-8">
       <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-3">
         <div>
           <img

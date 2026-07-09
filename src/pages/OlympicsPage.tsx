@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AppleEmoji } from "@/components/AppleEmoji";
 import { AnimatedMoney } from "@/components/AnimatedMoney";
-import { AmbientBlobs } from "@/components/AmbientBlobs";
+import EvilEye from "@/components/EvilEye";
 import { Header } from "@/components/Header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { EmojiName } from "@/lib/emoji-icons";
@@ -20,31 +20,31 @@ import { cn } from "@/lib/utils";
 
 const medalStyles = {
   gold: {
-    row: "glass-gold olympics-glow ring-amber-300/30",
+    row: "glass-liquid-row glass-liquid-row-gold olympics-glow",
     badge:
-      "bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 text-amber-950 shadow-sm shadow-amber-200/50",
-    place: "text-amber-700",
-    avatarRing: "ring-amber-300/80",
+      "bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 text-amber-950 shadow-sm shadow-amber-400/40",
+    place: "text-amber-300",
+    avatarRing: "ring-amber-400/60",
   },
   silver: {
-    row: "ring-zinc-300/40 bg-gradient-to-r from-zinc-50/90 via-white/60 to-white/40",
+    row: "glass-liquid-row glass-liquid-row-silver",
     badge:
-      "bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 text-zinc-800 shadow-sm",
-    place: "text-zinc-600",
-    avatarRing: "ring-zinc-300/80",
+      "bg-gradient-to-br from-zinc-200 via-zinc-300 to-zinc-500 text-zinc-900 shadow-sm",
+    place: "text-zinc-300",
+    avatarRing: "ring-zinc-400/50",
   },
   bronze: {
-    row: "ring-orange-300/35 bg-gradient-to-r from-orange-50/90 via-white/55 to-white/40",
+    row: "glass-liquid-row glass-liquid-row-bronze",
     badge:
       "bg-gradient-to-br from-orange-200 via-orange-400 to-orange-600 text-orange-950 shadow-sm",
-    place: "text-orange-700",
-    avatarRing: "ring-orange-300/70",
+    place: "text-orange-300",
+    avatarRing: "ring-orange-400/50",
   },
   "": {
-    row: "hover:bg-white/40",
-    badge: "bg-accent/10 text-accent ring-1 ring-accent/15",
-    place: "text-muted",
-    avatarRing: "ring-white/80",
+    row: "glass-liquid-row hover:bg-white/10",
+    badge: "bg-white/10 text-orange-300 ring-1 ring-white/15",
+    place: "text-zinc-400",
+    avatarRing: "ring-white/25",
   },
 } as const;
 
@@ -70,7 +70,7 @@ function LeaderboardRow({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.04 }}
       className={cn(
-        "glass group grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center gap-x-2.5 gap-y-1 rounded-xl px-3 py-3 transition-colors sm:grid-cols-[3.25rem_1fr_7rem_5.5rem] sm:grid-rows-1 sm:gap-4 sm:rounded-2xl sm:px-4 sm:py-3.5",
+        "group grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center gap-x-2.5 gap-y-1 rounded-xl px-3 py-3 transition-colors sm:grid-cols-[3.25rem_1fr_7rem_5.5rem] sm:grid-rows-1 sm:gap-4 sm:rounded-2xl sm:px-4 sm:py-3.5",
         style.row,
         isPodium && "sm:py-4",
       )}
@@ -146,7 +146,7 @@ function SidebarRankItem({
   const medal = podiumMedals[rank];
 
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-white/50 bg-white/45 px-3 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/60">
+    <div className="flex items-center gap-3 rounded-xl glass-liquid-row px-3 py-2.5 transition-colors hover:bg-white/10">
       {medal ? (
         <AppleEmoji name={medal} size={22} />
       ) : (
@@ -154,7 +154,7 @@ function SidebarRankItem({
           {rank}
         </span>
       )}
-      <Avatar className="size-9 ring-2 ring-white/80">
+      <Avatar className="size-9 ring-2 ring-white/20">
         <AvatarImage src={avatar} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
@@ -170,54 +170,64 @@ function SidebarRankItem({
 
 export default function OlympicsPage() {
   return (
-    <div className="relative min-h-dvh w-full bg-background text-foreground">
-      <AmbientBlobs
-        blobs={[
-          { className: "left-0 top-0 size-[28rem] -translate-x-1/3 bg-amber-200/30" },
-          { className: "right-0 top-0 size-96 translate-x-1/4 bg-accent/15" },
-          {
-            className:
-              "bottom-0 left-1/2 size-[32rem] -translate-x-1/2 translate-y-1/3 bg-amber-100/20",
-          },
-        ]}
-      />
+    <div className="olympics-theme relative min-h-dvh w-full bg-black text-white">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0 size-full overflow-hidden"
+      >
+        <div className="size-full -translate-y-[11vh] sm:-translate-y-[14vh]">
+          <EvilEye
+            eyeColor="#FF6F37"
+            intensity={1.5}
+            pupilSize={2}
+            irisWidth={0.35}
+            glowIntensity={0.3}
+            scale={1}
+            noiseScale={1.2}
+            pupilFollow={1.0}
+            flameSpeed={1.1}
+            backgroundColor="#000000"
+            globalMouseTracking
+          />
+        </div>
+      </div>
 
-      <Header olympicsActive />
+      <Header olympicsActive olympicsDark />
 
-      <main className="relative w-full px-4 py-5 sm:px-6 sm:py-10 lg:px-8">
+      <main className="relative z-10 mx-auto w-full max-w-xl px-7 py-5 sm:max-w-2xl sm:px-12 sm:py-10 lg:max-w-4xl lg:px-16 xl:max-w-[52rem] xl:px-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10 text-center"
+          className="mb-8 text-center sm:mb-10"
         >
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full glass-gold px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-800">
+          <div className="olympics-kicker mb-3 inline-flex items-center gap-2 rounded-full glass-liquid-gold px-3 py-1 text-xs font-semibold uppercase tracking-wider">
             <AppleEmoji name="trophy" size={16} />
             Live leaderboard
           </div>
-          <h1 className="text-[1.65rem] font-bold leading-tight tracking-tight sm:text-4xl">
+          <h1 className="text-[1.65rem] font-bold leading-tight tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:text-4xl">
             AI Fuňe{" "}
-            <span className="text-gold-gradient font-display">Olympics</span>
+            <span className="olympics-heading-gradient font-display">Olympics</span>
           </h1>
-          <p className="mx-auto mt-2 max-w-md text-sm text-muted">
+          <p className="olympics-subtitle mx-auto mt-2 max-w-md text-sm">
             Rebríček výkonnosti AI fuň v komunite — aktualizovaný každý mesiac.
           </p>
 
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full glass px-2 py-1.5 shadow-sm">
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full glass-liquid px-2 py-1.5 shadow-sm">
             <button
               type="button"
               title={OLYMPICS_PREV_MONTH}
-              className="flex size-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-white/60 hover:text-accent"
+              className="flex size-11 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-amber-200"
               aria-label={OLYMPICS_PREV_MONTH}
             >
-              <ChevronLeft className="size-4" />
+              <ChevronLeft className="size-4 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]" />
             </button>
-            <p className="min-w-0 px-1 text-sm font-semibold text-accent sm:min-w-[10rem] sm:px-2 sm:text-base">
+            <p className="min-w-0 px-1 text-sm font-semibold text-amber-200 drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)] sm:min-w-[10rem] sm:px-2 sm:text-base">
               {OLYMPICS_MONTH}
             </p>
             <button
               type="button"
               disabled
-              className="flex size-11 cursor-not-allowed items-center justify-center rounded-full text-muted/25"
+              className="flex size-11 cursor-not-allowed items-center justify-center rounded-full text-white/30"
               aria-label="Next month"
             >
               <ChevronRight className="size-4" />
@@ -225,9 +235,9 @@ export default function OlympicsPage() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px] lg:gap-8">
-          <section className="glass order-2 rounded-2xl p-3 sm:order-1 sm:rounded-3xl sm:p-5 lg:order-1">
-            <div className="mb-4 hidden grid-cols-[3.25rem_1fr_7rem_5.5rem] gap-4 border-b border-black/5 px-4 pb-3 text-[11px] font-semibold uppercase tracking-wider text-muted sm:grid">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr_240px] lg:gap-6">
+          <section className="glass-liquid order-2 rounded-2xl p-3 sm:order-1 sm:rounded-2xl sm:p-4 lg:order-1">
+            <div className="olympics-table-head mb-3 hidden grid-cols-[3.25rem_1fr_7rem_5.5rem] gap-4 border-b border-white/20 px-3 pb-3 text-[11px] font-bold uppercase tracking-widest sm:grid">
               <span>Rank</span>
               <span>Name</span>
               <span className="text-right">Performance</span>
@@ -245,9 +255,9 @@ export default function OlympicsPage() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.15 }}
-              className="glass-gold rounded-2xl p-4 sm:p-5"
+              className="glass-liquid-gold rounded-2xl p-3.5 sm:p-4"
             >
-              <h2 className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-amber-800">
+              <h2 className="olympics-section-title-gold mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide">
                 <AppleEmoji name="chart-up" size={18} />
                 June Top 3
               </h2>
@@ -268,9 +278,9 @@ export default function OlympicsPage() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.25 }}
-              className="glass rounded-2xl p-4 sm:p-5"
+              className="glass-liquid rounded-2xl p-3.5 sm:p-4"
             >
-              <h2 className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-accent">
+              <h2 className="olympics-section-title mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide">
                 <AppleEmoji name="trophy" size={18} />
                 Hall of Fame
               </h2>
@@ -278,16 +288,16 @@ export default function OlympicsPage() {
                 {HALL_OF_FAME.map((entry) => (
                   <div
                     key={entry.name}
-                    className="flex items-center gap-3 rounded-xl border border-white/50 bg-white/40 px-3 py-2.5 backdrop-blur-sm"
+                    className="flex items-center gap-3 rounded-xl glass-liquid-row px-3 py-2.5"
                   >
-                    <Avatar className="size-9 ring-2 ring-amber-200/60">
+                    <Avatar className="size-9 ring-2 ring-amber-400/40">
                       <AvatarImage src={entry.avatar} alt={entry.name} />
                       <AvatarFallback>{entry.name[0]}</AvatarFallback>
                     </Avatar>
                     <span className="flex-1 text-sm font-semibold">
                       {entry.name}
                     </span>
-                    <span className="flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-sm font-bold text-amber-700">
+                    <span className="flex items-center gap-1 rounded-full bg-amber-400/15 px-2 py-0.5 text-sm font-bold text-amber-200 ring-1 ring-amber-400/25">
                       {entry.wins}
                       <AppleEmoji name="trophy" size={14} />
                     </span>
@@ -299,13 +309,13 @@ export default function OlympicsPage() {
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-          <p className="flex items-center gap-2 text-xs text-muted">
+          <p className="flex items-center gap-2 text-xs text-zinc-400 drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
             <span className="size-1.5 animate-pulse rounded-full bg-green-500" />
             Last updated: {OLYMPICS_LAST_UPDATED}
           </p>
           <Link
             to="/"
-            className="inline-flex items-center gap-1 rounded-full glass px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-white/60"
+            className="inline-flex items-center gap-1 rounded-full glass-liquid px-4 py-2 text-sm font-medium text-orange-300 transition-colors hover:bg-white/10"
           >
             ← Späť na hlavnú stránku
           </Link>

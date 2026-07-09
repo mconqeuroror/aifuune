@@ -139,6 +139,139 @@ body {
     0 8px 32px rgba(251, 191, 36, 0.12);
 }
 
+/* Olympics dark theme — liquid glass over EvilEye background */
+.olympics-theme {
+  --color-muted: #d4d4d8;
+}
+
+.olympics-theme .glass-liquid {
+  background: rgba(8, 8, 8, 0.58);
+  backdrop-filter: blur(32px) saturate(1.5);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.olympics-theme .glass-liquid-gold {
+  background: rgba(20, 12, 4, 0.62);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  border: 1px solid rgba(251, 191, 36, 0.28);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(251, 191, 36, 0.1);
+}
+
+.olympics-theme .glass-liquid-row {
+  background: rgba(12, 12, 12, 0.5);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.olympics-heading-gradient {
+  background: linear-gradient(135deg, #fef08a 0%, #fbbf24 42%, #fb923c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(251, 191, 36, 0.55));
+}
+
+.olympics-kicker {
+  color: rgba(254, 243, 199, 0.95);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
+}
+
+.olympics-subtitle {
+  color: rgba(228, 228, 231, 0.88);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
+}
+
+.olympics-section-title {
+  color: rgba(254, 215, 170, 0.95);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+.olympics-section-title-gold {
+  color: rgba(253, 230, 138, 0.96);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+.olympics-table-head {
+  color: rgba(255, 255, 255, 0.72);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
+}
+
+.glass-liquid {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.glass-liquid-gold {
+  background: rgba(251, 191, 36, 0.1);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  box-shadow:
+    0 8px 40px rgba(251, 146, 60, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(251, 191, 36, 0.08);
+}
+
+.glass-liquid-row {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-liquid-row-gold {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(251, 191, 36, 0.1),
+    0 4px 24px rgba(251, 146, 60, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-liquid-row-silver {
+  background: rgba(228, 228, 231, 0.07);
+  border-color: rgba(212, 212, 216, 0.18);
+}
+
+.glass-liquid-row-bronze {
+  background: rgba(251, 146, 60, 0.07);
+  border-color: rgba(251, 146, 60, 0.16);
+}
+
+.glass-header-olympics-scrolled {
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-liquid,
+  .glass-liquid-gold,
+  .glass-liquid-row,
+  .glass-liquid-row-gold,
+  .glass-liquid-row-silver,
+  .glass-liquid-row-bronze {
+    background: rgba(24, 24, 27, 0.88);
+  }
+}
+
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass,
   .glass-gold,
