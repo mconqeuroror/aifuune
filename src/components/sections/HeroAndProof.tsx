@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, type PointerEvent } from "react";
 import { AppleEmoji } from "@/components/AppleEmoji";
 import { DiscordIcon } from "@/components/DiscordIcon";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
@@ -82,12 +82,12 @@ export function HeroSection() {
           />
         </motion.div>
 
-        <div className="overflow-visible pt-2 sm:pt-4">
+        <div className="w-full overflow-visible pt-2 sm:pt-4">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="overflow-visible px-1 text-[1.75rem] font-bold leading-[1.15] tracking-tight sm:px-2 sm:text-4xl md:text-[2.85rem]"
+            className="w-full overflow-visible px-1 text-[1.75rem] font-bold leading-[1.15] tracking-tight sm:px-2 sm:text-4xl md:text-[2.85rem]"
           >
             Ako zarobiť{" "}
             <span className="font-display inline-block pl-1.5 pr-0.5 font-bold tracking-normal text-money text-money-glow">
@@ -100,7 +100,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.05 }}
-            className="mt-3 text-xs leading-relaxed text-foreground/80 sm:text-sm"
+            className="mt-3 w-full text-xs leading-relaxed text-foreground/80 sm:text-sm"
           >
             Ukážem ti presný postup. Od nuly až po prvé peniaze.
             <br />
@@ -108,28 +108,29 @@ export function HeroSection() {
           </motion.p>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.08 }}
-          className="relative mt-5"
-        >
-          <EmailCaptureForm />
-        </motion.div>
+        <div className="mx-auto mt-5 w-full max-w-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08 }}
+          >
+            <EmailCaptureForm />
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.1 }}
-          className="mt-4 flex items-start justify-center gap-2 px-1 text-sm leading-relaxed text-foreground/80 sm:mt-4 sm:px-0 sm:text-base"
-        >
-          <AppleEmoji name="gift" size={22} className="mt-0.5 shrink-0" />
-          <span>
-            Bonus: medzi prihlásenými rozdávame balík v hodnote{" "}
-            <span className="font-medium text-money text-money-glow">4000+ €</span> — MacBook Air,
-            iPhone 17 Pro, 500 € a týždeň koučingu so mnou.
-          </span>
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="mx-auto mt-4 flex w-[85%] items-start justify-center gap-2 text-left text-sm leading-relaxed text-foreground/80 sm:text-base"
+          >
+            <AppleEmoji name="gift" size={22} className="mt-0.5 shrink-0" />
+            <span>
+              Bonus: medzi prihlásenými rozdávame balík v hodnote{" "}
+              <span className="font-medium text-money text-money-glow">4000+ €</span> — MacBook Air,
+              iPhone 17 Pro, 500 € a týždeň koučingu so mnou.
+            </span>
+          </motion.p>
+        </div>
       </div>
     </section>
   );
@@ -138,7 +139,7 @@ export function HeroSection() {
 export function MemberResultsSection() {
   return (
     <section id="vysledky-clenov" className="w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <div className="w-full">
+      <div className="mx-auto w-full max-w-xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,7 +149,7 @@ export function MemberResultsSection() {
           Výsledky členov
         </motion.h2>
 
-        <MemberResultsGrid />
+        <MemberResultsSlider />
       </div>
 
       <ProofCollage />
@@ -156,7 +157,36 @@ export function MemberResultsSection() {
   );
 }
 
-function MemberResultsGrid() {
+function MemberResultsSlider() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 });
+
+  function onPointerDown(event: PointerEvent<HTMLDivElement>) {
+    const track = trackRef.current;
+    if (!track) return;
+    dragState.current = {
+      active: true,
+      startX: event.clientX,
+      scrollLeft: track.scrollLeft,
+    };
+    track.setPointerCapture(event.pointerId);
+  }
+
+  function onPointerMove(event: PointerEvent<HTMLDivElement>) {
+    const track = trackRef.current;
+    if (!track || !dragState.current.active) return;
+    event.preventDefault();
+    const delta = event.clientX - dragState.current.startX;
+    track.scrollLeft = dragState.current.scrollLeft - delta;
+  }
+
+  function endDrag(event: PointerEvent<HTMLDivElement>) {
+    const track = trackRef.current;
+    if (!track || !dragState.current.active) return;
+    dragState.current.active = false;
+    track.releasePointerCapture(event.pointerId);
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -168,15 +198,18 @@ function MemberResultsGrid() {
       <p className="mb-2.5 text-center text-xs font-medium text-muted">
         1300+ členov · Online teraz · posledný sa pridal pred 10 min
       </p>
-      <div className="grid grid-cols-2 gap-2 min-[480px]:grid-cols-3 sm:gap-3">
-        {HERO_PROOF_CARDS.map((card, index) => (
+      <div
+        ref={trackRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        className="flex cursor-grab gap-3 overflow-x-auto pb-2 active:cursor-grabbing snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {HERO_PROOF_CARDS.map((card) => (
           <div
             key={card.src}
-            className={cn(
-              "overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8",
-              index === 2 &&
-                "col-span-2 w-[calc((100%-0.5rem)/2)] justify-self-center min-[480px]:col-span-1 min-[480px]:w-auto min-[480px]:justify-self-stretch",
-            )}
+            className="w-40 shrink-0 snap-start overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8 sm:w-44"
           >
             <img
               src={card.src}
@@ -185,6 +218,7 @@ function MemberResultsGrid() {
               height={240}
               decoding="async"
               fetchPriority="low"
+              draggable={false}
               className="aspect-[4/3] w-full rounded-md object-cover object-top"
             />
           </div>

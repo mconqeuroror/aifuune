@@ -8,12 +8,32 @@ export const HERO_PROOF_CARDS = [
     alt: "Výsledok 16 — $8.010,12 · top 2,71% Creators",
   },
   {
+    src: assetUrl("/images/all-b64-20.png"),
+    alt: "Výsledok 15 — $10.001,40 tento mesiac",
+  },
+  {
     src: assetUrl("/images/all-b64-17.png"),
     alt: "Výsledok 12 — $4.060,27 tento mesiac",
   },
   {
+    src: assetUrl("/images/all-b64-22.png"),
+    alt: "Výsledok 17",
+  },
+  {
     src: assetUrl("/images/all-b64-7.png"),
     alt: "Výsledok 5 — $3.010,09 earnings",
+  },
+  {
+    src: assetUrl("/images/all-b64-9.png"),
+    alt: "Výsledok 4",
+  },
+  {
+    src: assetUrl("/images/all-b64-25.png"),
+    alt: "Výsledok 20",
+  },
+  {
+    src: assetUrl("/images/all-b64-11.png"),
+    alt: "Výsledok 6",
   },
 ] as const;
 
