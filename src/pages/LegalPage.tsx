@@ -14,7 +14,7 @@ export default function LegalPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative min-h-dvh w-full bg-background text-foreground">
       <AmbientBlobs
         blobs={[
           { className: "left-0 top-0 size-80 -translate-x-1/3 bg-accent/10" },
@@ -22,7 +22,8 @@ export default function LegalPage() {
         ]}
       />
       <Header />
-      <main className="mx-auto max-w-3xl px-4 pb-16 pt-6 sm:px-6 sm:pt-10">
+      <main className="w-full px-4 pb-16 pt-6 sm:px-6 sm:pt-10 lg:px-8">
+        <div className="mx-auto w-full max-w-3xl">
         <Link
           to="/"
           className="inline-flex min-h-11 items-center text-sm text-muted transition-colors hover:text-accent"
@@ -36,6 +37,7 @@ export default function LegalPage() {
 
         <div className="mt-8">
           <LegalDocumentContent document={document} />
+        </div>
         </div>
       </main>
       <Footer />

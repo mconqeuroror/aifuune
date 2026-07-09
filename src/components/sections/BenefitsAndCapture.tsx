@@ -18,8 +18,8 @@ export function BenefitGrid() {
   const fullWidth = BENEFITS[6];
 
   return (
-    <section className="px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-4xl">
+    <section className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div className="w-full">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -69,8 +69,8 @@ export function BenefitGrid() {
 
 export function EmailCaptureSection() {
   return (
-    <section className="px-4 py-10 sm:px-6">
-      <div className="mx-auto max-w-xl">
+    <section className="w-full px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-xl">
         <EmailCaptureForm />
       </div>
     </section>

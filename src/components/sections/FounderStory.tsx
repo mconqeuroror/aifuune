@@ -5,8 +5,8 @@ import { IMAGES } from "@/lib/content";
 
 export function FounderStory() {
   return (
-    <section className="px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-12">
+    <section className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div className="grid w-full grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-12">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,7 +66,7 @@ export function FounderStory() {
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mx-auto mt-10 max-w-3xl"
+        className="mx-auto mt-10 w-full max-w-3xl"
       >
         <Card className="glass">
           <CardContent className="p-6 text-center sm:p-8">

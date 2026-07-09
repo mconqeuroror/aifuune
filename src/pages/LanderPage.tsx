@@ -16,7 +16,7 @@ import { ConversionProvider } from "@/lib/conversion-context";
 export default function LanderPage() {
   return (
     <ConversionProvider>
-      <div className="relative min-h-screen bg-background text-foreground">
+      <div className="relative min-h-dvh w-full bg-background text-foreground">
         <AmbientBlobs
           blobs={[
             { className: "left-0 top-[55%] size-80 -translate-x-1/3 bg-accent/12" },
@@ -24,7 +24,7 @@ export default function LanderPage() {
           ]}
         />
         <Header />
-        <main className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-24">
+        <main className="w-full pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-24">
           <HeroSection />
           <MemberResultsSection />
           <BenefitGrid />

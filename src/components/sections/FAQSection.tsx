@@ -9,8 +9,8 @@ import { FAQ_ITEMS } from "@/lib/content";
 
 export function FAQSection() {
   return (
-    <section className="px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-2xl">
+    <section className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div className="mx-auto w-full max-w-3xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

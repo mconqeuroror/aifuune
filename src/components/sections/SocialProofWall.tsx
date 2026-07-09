@@ -56,8 +56,8 @@ function LazyProofCard({
 
 export function SocialProofWall() {
   return (
-    <section className="bg-zinc-950 px-4 py-14 text-zinc-100 sm:px-6 sm:py-20">
-      <div className="mx-auto max-w-5xl">
+    <section className="w-full bg-zinc-950 px-4 py-14 text-zinc-100 sm:px-6 sm:py-20 lg:px-8">
+      <div className="w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

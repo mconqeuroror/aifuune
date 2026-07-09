@@ -170,7 +170,7 @@ function SidebarRankItem({
 
 export default function OlympicsPage() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative min-h-dvh w-full bg-background text-foreground">
       <AmbientBlobs
         blobs={[
           { className: "left-0 top-0 size-[28rem] -translate-x-1/3 bg-amber-200/30" },
@@ -184,7 +184,7 @@ export default function OlympicsPage() {
 
       <Header olympicsActive />
 
-      <main className="relative mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-10">
+      <main className="relative w-full px-4 py-5 sm:px-6 sm:py-10 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

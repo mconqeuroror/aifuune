@@ -48,7 +48,7 @@ export function Header({ olympicsActive = false }: HeaderProps) {
           scrolled ? "glass-header-scrolled rounded-b-2xl" : "bg-transparent",
         )}
       >
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-3 py-3 sm:px-6">
+        <div className="flex w-full items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link
             to="/"
             onClick={handleLogoClick}

@@ -48,9 +48,9 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-[calc(100svh-env(safe-area-inset-top,0px)-3.5rem)] flex-col justify-center px-3 py-4 sm:min-h-[calc(100svh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6"
+      className="relative isolate flex min-h-[calc(100dvh-env(safe-area-inset-top,0px)-3.5rem)] w-full flex-col justify-center px-4 py-4 sm:min-h-[calc(100dvh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6 lg:px-8"
     >
-      <div className="relative mx-auto w-full max-w-3xl text-center">
+      <div className="relative w-full text-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -137,8 +137,8 @@ export function HeroSection() {
 
 export function MemberResultsSection() {
   return (
-    <section id="vysledky-clenov" className="px-3 py-8 sm:px-6 sm:py-12">
-      <div className="mx-auto max-w-3xl">
+    <section id="vysledky-clenov" className="w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className="w-full">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -205,14 +205,14 @@ export function ProofCollage() {
   const y3 = useTransform(scrollYProgress, [0, 1], [15, -25]);
 
   return (
-    <div ref={ref} className="relative px-4 py-8 sm:px-6 sm:py-14">
-      <div className="mx-auto max-w-5xl">
+    <div ref={ref} className="relative w-full px-4 py-8 sm:px-6 sm:py-14 lg:px-8">
+      <div className="w-full">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="relative mx-auto aspect-[4/3] max-w-3xl sm:aspect-[16/10]"
+          className="relative mx-auto aspect-[4/3] w-full max-w-5xl sm:aspect-[16/10]"
         >
           <motion.div
             style={{ y: y1 }}

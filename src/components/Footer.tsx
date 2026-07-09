@@ -3,8 +3,8 @@ import { IMAGES } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="border-t border-black/6 bg-background px-4 py-12 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] sm:px-6">
-      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-3">
+    <footer className="w-full border-t border-black/6 bg-background px-4 py-12 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] sm:px-6 lg:px-8">
+      <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-3">
         <div>
           <img
             src={IMAGES.logo}
@@ -70,7 +70,7 @@ export function Footer() {
         </div>
       </div>
 
-      <p className="mx-auto mt-10 max-w-5xl text-center text-xs text-muted">
+      <p className="mt-10 w-full text-center text-xs text-muted">
         © 2026 RYO GROUP s.r.o. Všetky práva vyhradené.
       </p>
     </footer>
