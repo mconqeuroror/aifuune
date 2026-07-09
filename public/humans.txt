@@ -3,6 +3,7 @@ Founder: Juraj Olšavský (Mr. Byznys)
 Company: RYO GROUP s.r.o.
 Contact: jorgebyznys@gmail.com
 Phone: +421 940 216 575
+Site: https://www.aifune.sk
 
 /* THANKS */
 Community members featured in social proof and Fune Olympics leaderboard

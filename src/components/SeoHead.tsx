@@ -95,7 +95,7 @@ export function SeoHead() {
 
     upsertMeta("name", "description", seo.description);
     upsertMeta("name", "keywords", seo.keywords.join(", "));
-    upsertMeta("name", "author", SITE.founderAlias);
+    upsertMeta("name", "author", SITE.founder);
     upsertMeta("name", "robots", robots);
     upsertMeta("name", "googlebot", robots);
     upsertMeta("name", "bingbot", robots);

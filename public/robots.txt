@@ -1,14 +1,22 @@
 User-agent: *
 Allow: /
+
 # AI crawlers
 User-agent: GPTBot
 Allow: /
+
 User-agent: ChatGPT-User
 Allow: /
+
 User-agent: ClaudeBot
 Allow: /
+
 User-agent: PerplexityBot
 Allow: /
+
 User-agent: Google-Extended
 Allow: /
-# Set VITE_SITE_URL to emit Sitemap URL
+
+Sitemap: https://www.aifune.sk/sitemap.xml
+Host: www.aifune.sk
+

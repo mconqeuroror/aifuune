@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AppleEmoji } from "@/components/AppleEmoji";
+import { AnimatedMoney } from "@/components/AnimatedMoney";
+import { Header } from "@/components/Header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { IMAGES } from "@/lib/content";
 import type { EmojiName } from "@/lib/emoji-icons";
 import {
   HALL_OF_FAME,
@@ -83,22 +83,28 @@ function LeaderboardRow({
         >
           {entry.rank}
         </div>
-        {entry.rank === 1 && (
-          <AppleEmoji name="crown" size={20} className="hidden sm:block" />
-        )}
       </div>
 
       <div className="flex min-w-0 items-center gap-3">
-        <Avatar
-          className={cn(
-            "shrink-0 ring-2",
-            isPodium ? "size-11 sm:size-12" : "size-9 sm:size-10",
-            style.avatarRing,
+        <div className="relative shrink-0">
+          {entry.rank === 1 && (
+            <AppleEmoji
+              name="crown"
+              size={20}
+              className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 drop-shadow-sm"
+            />
           )}
-        >
-          <AvatarImage src={entry.avatar} alt={entry.name} />
-          <AvatarFallback>{entry.name[0]}</AvatarFallback>
-        </Avatar>
+          <Avatar
+            className={cn(
+              "ring-2",
+              isPodium ? "size-11 sm:size-12" : "size-9 sm:size-10",
+              style.avatarRing,
+            )}
+          >
+            <AvatarImage src={entry.avatar} alt={entry.name} />
+            <AvatarFallback>{entry.name[0]}</AvatarFallback>
+          </Avatar>
+        </div>
         <div className="min-w-0 text-left">
           <span className="block truncate font-semibold">{entry.name}</span>
           <span className={cn("text-xs font-medium sm:hidden", style.place)}>
@@ -107,9 +113,11 @@ function LeaderboardRow({
         </div>
       </div>
 
-      <div className="font-display text-right text-base font-bold text-money sm:col-start-3">
-        {entry.performance}
-      </div>
+      <AnimatedMoney
+        amount={entry.performance}
+        rank={entry.rank}
+        className="block w-full text-right font-display text-base font-bold text-money sm:col-start-3"
+      />
 
       <div
         className={cn(
@@ -150,45 +158,34 @@ function SidebarRankItem({
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
       <span className="flex-1 truncate text-sm font-medium">{name}</span>
-      <span className="font-display text-sm font-bold text-money">{amount}</span>
+      <AnimatedMoney
+        amount={amount}
+        rank={rank}
+        className="font-display text-sm font-bold text-money"
+      />
     </div>
   );
 }
 
 export default function OlympicsPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative min-h-screen bg-background text-foreground">
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-32 top-0 size-96 rounded-full bg-amber-200/25 blur-3xl"
+        className="pointer-events-none absolute -left-32 -top-24 size-[28rem] rounded-full bg-amber-200/30 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-24 top-32 size-80 rounded-full bg-accent/12 blur-3xl"
+        className="pointer-events-none absolute -right-24 top-0 size-96 rounded-full bg-accent/15 blur-3xl"
       />
       <div
         aria-hidden
         className="pointer-events-none absolute bottom-0 left-1/2 size-[32rem] -translate-x-1/2 rounded-full bg-amber-100/20 blur-3xl"
       />
 
-      <header className="sticky top-0 z-50 overflow-hidden rounded-b-2xl glass-header-scrolled">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-          <Link to="/" className="transition-opacity hover:opacity-80">
-            <img
-              src={IMAGES.logo}
-              alt="AI Fuňe"
-              className="h-8 w-auto sm:h-10"
-            />
-          </Link>
-          <Badge className="gap-1.5 border-amber-200/50 bg-amber-50/80 px-3 py-1.5 text-amber-800">
-            <AppleEmoji name="trophy" size={16} />
-            Fune Olympics
-          </Badge>
-        </div>
-        <div className="h-px bg-gradient-to-r from-transparent via-amber-200/40 to-transparent" />
-      </header>
+      <Header olympicsActive />
 
-      <main className="relative mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+      <main className="relative mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

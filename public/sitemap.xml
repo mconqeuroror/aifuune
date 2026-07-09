@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/</loc>
+    <loc>https://www.aifune.sk/</loc>
     <lastmod>2026-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="sk-SK" href="/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="/" />
+    <xhtml:link rel="alternate" hreflang="sk-SK" href="https://www.aifune.sk/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aifune.sk/" />
   </url>
   <url>
-    <loc>/olympics</loc>
+    <loc>https://www.aifune.sk/olympics</loc>
     <lastmod>2026-07-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="sk-SK" href="/olympics" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="/olympics" />
+    <xhtml:link rel="alternate" hreflang="sk-SK" href="https://www.aifune.sk/olympics" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aifune.sk/olympics" />
   </url>
 </urlset>
 

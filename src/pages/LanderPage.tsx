@@ -15,7 +15,15 @@ import { ConversionProvider } from "@/lib/conversion-context";
 export default function LanderPage() {
   return (
     <ConversionProvider>
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="relative min-h-screen bg-background text-foreground">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-20 -top-24 size-80 rounded-full bg-accent/15 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-10 -top-16 size-72 rounded-full bg-cyan-300/20 blur-3xl"
+        />
         <Header />
         <main>
           <HeroSection />

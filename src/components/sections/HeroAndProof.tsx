@@ -18,10 +18,10 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden px-4 pb-4 pt-4 sm:px-6 sm:pb-8 sm:pt-8"
+      className="relative overflow-hidden px-4 pb-4 pt-2 sm:px-6 sm:pb-8 sm:pt-4"
     >
-      <Blob className="-left-20 -top-10 size-72 bg-accent/15" />
-      <Blob className="right-0 top-20 size-64 bg-cyan-300/20" />
+      <Blob className="left-1/4 top-8 size-64 bg-accent/10" />
+      <Blob className="right-1/4 top-16 size-56 bg-cyan-300/15" />
 
       <div className="relative mx-auto max-w-3xl text-center">
         <motion.h1

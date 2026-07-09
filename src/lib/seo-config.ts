@@ -36,8 +36,32 @@ export type SeoPageConfig = {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 };
 
+const HOME_DESCRIPTION =
+  "Získaj zadarmo návod, v ktorom ti Juraj ukáže presný postup ako zarobiť 10 000 €+ mesačne s AI fuňami. Od nuly po prvé peniaze — bez skúseností, celé zadarmo";
+
+export const HOME_KEYWORDS = [
+  "AI fuňe",
+  "AI modelky",
+  "zarábať online",
+  "Juraj Olšavský",
+  "Tomáš Ižvolt",
+  "pasívny príjem",
+  "Slovensko",
+  "Mr. Byznys",
+  "kurz zadarmo",
+  "video zadarmo",
+  "online biznis 2026",
+  "AI",
+  "Onlyfans",
+  "Fanvue",
+  "Ako začať s Fanvue",
+  "Ako začať s onlyfans",
+] as const;
+
 function siteUrl(): string {
-  return (import.meta.env.VITE_SITE_URL ?? "").replace(/\/$/, "");
+  return (
+    import.meta.env.VITE_SITE_URL ?? "https://www.aifune.sk"
+  ).replace(/\/$/, "");
 }
 
 function absoluteUrl(path: string): string {
@@ -66,9 +90,6 @@ export function getOgImageUrl(imagePath = SITE.defaultOgImage): string {
   return absoluteAsset(imagePath);
 }
 
-const HOME_DESCRIPTION =
-  "Získaj zadarmo video, v ktorom Mr. Byznys ukáže presný postup ako zarobiť 10 000 €+ mesačne s AI fuňami. Od nuly po prvé peniaze — bez skúseností, celé zadarmo.";
-
 const OLYMPICS_DESCRIPTION =
   "Fune Olympics — mesačný rebríček najlepších AI fuňa tvorcov v komunite AI Fuňe. Sleduj výsledky, porovnaj zárobky a inšpiruj sa top performerami.";
 
@@ -77,17 +98,7 @@ export const SEO_PAGES: Record<string, SeoPageConfig> = {
     path: "/",
     title: "AI Fuňe — Ako zarobiť 10 000 €+ mesačne s AI fuňami",
     description: HOME_DESCRIPTION,
-    keywords: [
-      "AI fuňe",
-      "AI modelky",
-      "zarábať online",
-      "pasívny príjem",
-      "Slovensko",
-      "Mr. Byznys",
-      "kurz zadarmo",
-      "video zadarmo",
-      "online biznis 2026",
-    ],
+    keywords: [...HOME_KEYWORDS],
     ogType: "website",
     jsonLd: [
       {
@@ -128,7 +139,7 @@ export const SEO_PAGES: Record<string, SeoPageConfig> = {
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        name: "AI Fuňe — Zadarmo video",
+        name: "AI Fuňe — Zadarmo návod",
         url: absoluteUrl("/"),
         description: HOME_DESCRIPTION,
         inLanguage: SITE.language,
@@ -225,6 +236,6 @@ export const LLMS_SUMMARY = {
   olympics: OLYMPICS_DESCRIPTION,
   audience: "Slovak-speaking beginners interested in earning online with AI models.",
   offer:
-    "Free educational video + email list. Bonus giveaway (MacBook Air, iPhone 17 Pro, €500, coaching week).",
+    "Free educational guide (návod) + email list. Bonus giveaway (MacBook Air, iPhone 17 Pro, €500, coaching week).",
   faq: FAQ_ITEMS.map(([q, a]) => ({ question: q, answer: a })),
 };

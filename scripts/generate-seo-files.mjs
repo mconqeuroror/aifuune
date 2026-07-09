@@ -4,6 +4,11 @@ import { join } from "node:path";
 const ROOT = process.cwd();
 const PUBLIC = join(ROOT, "public");
 
+const DEFAULT_SITE_URL = "https://www.aifune.sk";
+
+const HOME_DESCRIPTION =
+  "Získaj zadarmo návod, v ktorom ti Juraj ukáže presný postup ako zarobiť 10 000 €+ mesačne s AI fuňami. Od nuly po prvé peniaze — bez skúseností, celé zadarmo";
+
 function loadEnv() {
   const envPath = join(ROOT, ".env");
   if (!existsSync(envPath)) return;
@@ -20,7 +25,10 @@ function loadEnv() {
 
 loadEnv();
 
-const SITE_URL = (process.env.VITE_SITE_URL ?? "").replace(/\/$/, "");
+const SITE_URL = (process.env.VITE_SITE_URL ?? DEFAULT_SITE_URL).replace(
+  /\/$/,
+  "",
+);
 const NOINDEX = process.env.VITE_NOINDEX === "true";
 
 const SITE = {
@@ -40,28 +48,26 @@ const ROUTES = [
     priority: "1.0",
     changefreq: "weekly",
     title: "AI Fuňe — Ako zarobiť 10 000 €+ mesačne s AI fuňami",
-    description:
-      "Získaj zadarmo video, v ktorom Mr. Byznys ukáže presný postup ako zarobiť 10 000 €+ mesačne s AI fuňami.",
+    description: HOME_DESCRIPTION,
   },
   {
     path: "/olympics",
     priority: "0.8",
     changefreq: "daily",
-    title: "Fune Olympics — Rebríček AI fuňa tvorcov",
+    title: "Fune Olympics — Rebríček AI fuňa tvorcov | AI Fuňe",
     description:
-      "Mesačný rebríček najlepších AI fuňa tvorcov v komunite AI Fuňe.",
+      "Fune Olympics — mesačný rebríček najlepších AI fuňa tvorcov v komunite AI Fuňe. Sleduj výsledky, porovnaj zárobky a inšpiruj sa top performerami.",
   },
 ];
 
 function abs(path) {
-  if (!SITE_URL) return path;
   return `${SITE_URL}${path}`;
 }
 
 const lastmod = new Date().toISOString().slice(0, 10);
 
 const robots = NOINDEX
-  ? ["User-agent: *", "Disallow: /", ""].join("\n")
+  ? "User-agent: *\nDisallow: /\n"
   : [
       "User-agent: *",
       "Allow: /",
@@ -82,12 +88,10 @@ const robots = NOINDEX
       "User-agent: Google-Extended",
       "Allow: /",
       "",
-      SITE_URL ? `Sitemap: ${abs("/sitemap.xml")}` : "# Set VITE_SITE_URL to emit Sitemap URL",
-      SITE_URL ? `Host: ${SITE_URL.replace(/^https?:\/\//, "")}` : "",
+      `Sitemap: ${abs("/sitemap.xml")}`,
+      `Host: ${SITE_URL.replace(/^https?:\/\//, "")}`,
       "",
-    ]
-      .filter(Boolean)
-      .join("\n");
+    ].join("\n");
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -107,35 +111,37 @@ ${ROUTES.map(
 
 const llms = `# ${SITE.name}
 
-> ${ROUTES[0].description}
+> ${HOME_DESCRIPTION}
 
-${SITE.name} is a Slovak-language educational landing page by ${SITE.founderAlias} (${SITE.founder}) / ${SITE.legalName}. The site offers a free video course on building and monetizing AI model / virtual influencer businesses ("AI fuňe") for the Slovak market.
+${SITE.name} is a Slovak-language educational landing page by ${SITE.founder} (${SITE.founderAlias}) / ${SITE.legalName}. The site offers a free step-by-step guide on building and monetizing AI model / virtual influencer businesses ("AI fuňe") for the Slovak market.
 
 ## Primary audience
 
 - Slovak speakers in Slovakia and abroad
 - Beginners looking for online income without prior experience
-- People interested in AI-generated influencer businesses
+- People interested in AI-generated influencer businesses, Fanvue, and OnlyFans-style monetization
 
 ## Key pages
 
-- [Home — free video signup](${abs("/")}): Main VSL lander with email capture, social proof, FAQ, and founder story.
+- [Home — free guide signup](${abs("/")}): Main VSL lander with email capture, social proof, FAQ, and founder story.
 - [Fune Olympics leaderboard](${abs("/olympics")}): Monthly community earnings leaderboard and hall of fame.
 
 ## What users can do
 
-- Request a free educational video via email signup
+- Request a free educational guide via email signup
 - Browse earnings proof screenshots from community members
 - View the Fune Olympics creator leaderboard
 - Contact support via email or phone
 
 ## Contact
 
+- Founder: ${SITE.founder}
 - Email: ${SITE.email}
 - Phone: ${SITE.phone}
 - Company: ${SITE.legalName}
 - Country: ${SITE.country}
 - Language: ${SITE.language}
+- Website: ${SITE_URL}
 
 ## Optional
 
@@ -144,26 +150,43 @@ ${SITE.name} is a Slovak-language educational landing page by ${SITE.founderAlia
 `;
 
 const llmsFull = `${llms}
-
 ## Extended FAQ
 
 ${[
-  ["Ako dlho kým zarobím prvé €?", "Mne to trvalo týždeň, zarobil som 35 €. Nevedel som ešte nič. Dnes máme ľudí, čo za prvé 2 týždne zarobili 1600 €. Závisí to od teba."],
-  ["Dá sa to robiť popri škole alebo práci?", "Áno. Väčšina našich ľudí má školu, prácu alebo rodinu. Stačia 2 hodiny denne."],
-  ["Čo všetko sa naučíš?", "Úplne všetko, čo potrebuješ na štart. Video ide do detailov, krok po kroku."],
-  ["Nie je už neskoro?", "Naopak. AI modelky sú teraz na takej úrovni, že ich už nevieš rozoznať od reálnych ľudí. Dobrých je málo — ukážem ti, ako takú spraviť."],
-  ["Zarobím na 100%?", "Nie som veštec. Ak nemakáš, nezarobíš. Ale ak makáš a si konzistentný, šanca je fakt slušná."],
-  ["Je to legálne?", "Áno. Nič skryté. Ľudia presne vedia, za čo platia."],
+  [
+    "Ako dlho kým zarobím prvé €?",
+    "Mne to trvalo týždeň, zarobil som 35 €. Nevedel som ešte nič. Dnes máme ľudí, čo za prvé 2 týždne zarobili 1600 €. Závisí to od teba.",
+  ],
+  [
+    "Dá sa to robiť popri škole alebo práci?",
+    "Áno. Väčšina našich ľudí má školu, prácu alebo rodinu. Stačia 2 hodiny denne.",
+  ],
+  [
+    "Čo všetko sa naučíš?",
+    "Úplne všetko, čo potrebuješ na štart. Video ide do detailov, krok po kroku.",
+  ],
+  [
+    "Nie je už neskoro?",
+    "Naopak. AI modelky sú teraz na takej úrovni, že ich už nevieš rozoznať od reálnych ľudí. Dobrých je málo — ukážem ti, ako takú spraviť.",
+  ],
+  [
+    "Zarobím na 100%?",
+    "Nie som veštec. Ak nemakáš, nezarobíš. Ale ak makáš a si konzistentný, šanca je fakt slušná.",
+  ],
+  [
+    "Je to legálne?",
+    "Áno. Nič skryté. Ľudia presne vedia, za čo platia.",
+  ],
 ]
-  .map(([q, a]) => `### ${q}\n${a}`)
+  .map(([q, a]) => `### ${q}\n\n${a}`)
   .join("\n\n")}
 
-## Topics covered in the free video
+## Topics covered in the free guide
 
 - Why AI fuňe are positioned as a strong online business opportunity in 2026
 - Founder journey and common beginner mistakes
 - How to create your own AI model and start earning
-- Required tools and software stack
+- Required tools and software stack (Fanvue, OnlyFans ecosystem)
 - Marketing basics for visibility
 - Monetization and payout mechanics
 - Community and mentorship support
@@ -178,6 +201,7 @@ Founder: ${SITE.founder} (${SITE.founderAlias})
 Company: ${SITE.legalName}
 Contact: ${SITE.email}
 Phone: ${SITE.phone}
+Site: ${SITE_URL}
 
 /* THANKS */
 Community members featured in social proof and Fune Olympics leaderboard
@@ -199,6 +223,4 @@ writeFileSync(join(PUBLIC, "ai.txt"), `${llms}\n`, "utf8");
 
 console.log("Generated SEO files in public/:");
 console.log("  robots.txt, sitemap.xml, llms.txt, llms-full.txt, humans.txt, ai.txt");
-if (!SITE_URL) {
-  console.warn("  Warning: VITE_SITE_URL is not set — sitemap/llms use relative URLs.");
-}
+console.log(`  Site URL: ${SITE_URL}`);
