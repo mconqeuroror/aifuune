@@ -274,6 +274,27 @@ export function ShapeGrid({
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
+    // Pause the rAF loop when off-screen, tab hidden, or reduced motion
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    let running = false;
+    let inView = false;
+
+    const startLoop = () => {
+      if (running || reducedMotion) return;
+      running = true;
+      requestRef.current = requestAnimationFrame(updateAnimation);
+    };
+
+    const stopLoop = () => {
+      running = false;
+      if (requestRef.current !== null) {
+        cancelAnimationFrame(requestRef.current);
+        requestRef.current = null;
+      }
+    };
+
     const updateAnimation = () => {
       const effectiveSpeed = Math.max(speed, 0.1);
       const wrapX = isHex ? hexHoriz * 2 : squareSize;
@@ -308,7 +329,9 @@ export function ShapeGrid({
 
       updateCellOpacities();
       drawGrid();
-      requestRef.current = requestAnimationFrame(updateAnimation);
+      if (running) {
+        requestRef.current = requestAnimationFrame(updateAnimation);
+      }
     };
 
     const setHoveredCell = (col: number, row: number) => {
@@ -395,13 +418,28 @@ export function ShapeGrid({
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
-    requestRef.current = requestAnimationFrame(updateAnimation);
+    // Always paint one frame so reduced-motion users still see the grid
+    updateCellOpacities();
+    drawGrid();
+
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView && !document.hidden) startLoop();
+      else stopLoop();
+    });
+    observer.observe(canvas);
+
+    const handleVisibility = () => {
+      if (document.hidden || !inView) stopLoop();
+      else startLoop();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      if (requestRef.current !== null) {
-        cancelAnimationFrame(requestRef.current);
-      }
+      document.removeEventListener("visibilitychange", handleVisibility);
+      observer.disconnect();
+      stopLoop();
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
     };

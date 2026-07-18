@@ -283,8 +283,14 @@ export default function EvilEye({
     container.appendChild(gl.canvas);
 
     let animationFrameId: number;
+    let running = false;
+    let inView = false;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     function update(time: number) {
+      if (!running) return;
       animationFrameId = requestAnimationFrame(update);
       mouse.x += (mouse.tx - mouse.x) * 0.18;
       mouse.y += (mouse.ty - mouse.y) * 0.18;
@@ -292,10 +298,38 @@ export default function EvilEye({
       program.uniforms.uTime.value = time * 0.001;
       renderer.render({ scene: mesh });
     }
-    animationFrameId = requestAnimationFrame(update);
+
+    const startLoop = () => {
+      if (running || reducedMotion) return;
+      running = true;
+      animationFrameId = requestAnimationFrame(update);
+    };
+
+    const stopLoop = () => {
+      running = false;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    // Static frame so reduced-motion users still get the backdrop
+    renderer.render({ scene: mesh });
+
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView && !document.hidden) startLoop();
+      else stopLoop();
+    });
+    observer.observe(container);
+
+    const handleVisibility = () => {
+      if (document.hidden || !inView) stopLoop();
+      else startLoop();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      observer.disconnect();
+      stopLoop();
       window.removeEventListener("resize", resize);
       moveTarget.removeEventListener("mousemove", onMouseMove);
       if (!globalMouseTracking) {

@@ -38,7 +38,7 @@ export function BenefitGrid() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.07 }}
             >
-              <Card className="glass h-full">
+              <Card className="glass card-lift h-full">
                 <CardContent className="p-5">
                   <BenefitLine icon={item.icon} text={item.text} />
                 </CardContent>
@@ -55,7 +55,7 @@ export function BenefitGrid() {
             transition={{ duration: 0.45, delay: 0.45 }}
             className="mt-4"
           >
-            <Card className="glass">
+            <Card className="glass card-lift">
               <CardContent className="p-5">
                 <BenefitLine icon={fullWidth.icon} text={fullWidth.text} />
               </CardContent>

@@ -26,7 +26,7 @@ function HeroDecorImage({
   return (
     <div
       className={cn(
-        "absolute rounded-2xl shadow-[0_10px_24px_rgba(0,0,0,0.14)] sm:shadow-[0_14px_32px_rgba(0,0,0,0.16)]",
+        "absolute rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.55)] ring-1 ring-white/10 sm:shadow-[0_20px_48px_rgba(0,0,0,0.6)]",
         rotateClassName,
         className,
       )}
@@ -51,19 +51,22 @@ export function HeroSection() {
       id="hero"
       className="relative isolate flex min-h-[calc(100dvh-env(safe-area-inset-top,0px)-3.5rem)] w-full flex-col justify-center overflow-hidden px-4 py-4 sm:min-h-[calc(100dvh-env(safe-area-inset-top,0px)-4rem)] sm:px-6 sm:py-6 lg:px-8"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 opacity-45 sm:opacity-50">
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(120%_90%_at_50%_0%,black_30%,transparent_78%)] sm:opacity-35"
+        aria-hidden
+      >
         <ShapeGrid
           speed={0.37}
           squareSize={47}
           direction="up"
-          borderColor="#5ef0ff"
-          hoverFillColor="#222"
+          borderColor="#372a52"
+          hoverFillColor="#150d24"
           shape="square"
           hoverTrailAmount={0}
           className="size-full"
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background/20 via-background/55 to-background" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-[#08060d]" />
 
       <div className="relative z-10 w-full text-center">
         <motion.div
@@ -260,7 +263,7 @@ function MemberResultsSlider() {
         {loopCards.map((card, index) => (
           <div
             key={`${card.src}-${index}`}
-            className="w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8 sm:w-44"
+            className="w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-900/95 p-1 shadow-md ring-1 ring-white/8 transition duration-300 hover:-translate-y-0.5 hover:ring-white/20 sm:w-44"
           >
             <img
               src={card.src}
@@ -315,7 +318,7 @@ export function ProofCollage() {
               alt="AI Expert"
               loading="lazy"
               decoding="async"
-              className="w-full rounded-2xl object-cover shadow-2xl ring-2 ring-white/60"
+              className="w-full rounded-2xl object-cover shadow-2xl shadow-black/60 ring-1 ring-white/12"
             />
           </motion.div>
 
@@ -328,7 +331,7 @@ export function ProofCollage() {
               alt="Výsledok 1"
               loading="lazy"
               decoding="async"
-              className="w-full rounded-xl object-cover shadow-xl ring-1 ring-white/50"
+              className="w-full rounded-xl object-cover shadow-xl shadow-black/50 ring-1 ring-white/12"
             />
           </motion.div>
 
@@ -341,7 +344,7 @@ export function ProofCollage() {
               alt="Výsledok 2"
               loading="lazy"
               decoding="async"
-              className="w-full rounded-xl object-cover shadow-xl ring-1 ring-white/50"
+              className="w-full rounded-xl object-cover shadow-xl shadow-black/50 ring-1 ring-white/12"
             />
           </motion.div>
 
@@ -354,7 +357,7 @@ export function ProofCollage() {
               alt="Výsledok 3"
               loading="lazy"
               decoding="async"
-              className="w-full rounded-xl object-cover shadow-lg ring-1 ring-white/40"
+              className="w-full rounded-xl object-cover shadow-lg shadow-black/50 ring-1 ring-white/12"
             />
           </motion.div>
 

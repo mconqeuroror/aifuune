@@ -23,7 +23,7 @@ export const SITE = {
   phoneDisplay: "+421 940 216 575",
   discord: "https://discord.gg/aifune",
   twitterHandle: "@aifune",
-  themeColor: "#0ea5b5",
+  themeColor: "#08060d",
   defaultOgImage: "/images/all-b64-0.png",
 } as const;
 

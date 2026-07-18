@@ -36,7 +36,7 @@ export function StickyCtaBar() {
   }
 
   return (
-    <div className="glass-header-scrolled safe-bottom fixed inset-x-0 bottom-0 z-50 rounded-t-2xl border-t border-black/6 px-3 pt-3 sm:px-4">
+    <div className="glass-header-scrolled safe-bottom fixed inset-x-0 bottom-0 z-50 rounded-t-3xl border-t border-black/6 px-3 pt-3 sm:px-4">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
         <p className="text-center text-xs font-medium text-foreground/85 sm:text-left sm:text-sm">
           Ešte si si nepozrel video?

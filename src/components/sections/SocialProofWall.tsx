@@ -37,7 +37,7 @@ function LazyProofCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, delay: (index % 6) * 0.05 }}
-      className="break-inside-avoid rounded-xl bg-zinc-900/95 p-1.5 shadow-lg ring-1 ring-white/8"
+      className="break-inside-avoid rounded-xl bg-zinc-900/95 p-1.5 shadow-lg ring-1 ring-white/8 transition duration-300 hover:-translate-y-0.5 hover:ring-white/20"
     >
       {visible ? (
         <img

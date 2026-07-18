@@ -7,10 +7,18 @@ import { cn } from "@/lib/utils";
 
 type HeaderProps = {
   olympicsActive?: boolean;
+  /** Dark purple glass header (lander + Olympics) */
+  darkHeader?: boolean;
+  /** @deprecated use darkHeader */
   olympicsDark?: boolean;
 };
 
-export function Header({ olympicsActive = false, olympicsDark = false }: HeaderProps) {
+export function Header({
+  olympicsActive = false,
+  darkHeader = false,
+  olympicsDark = false,
+}: HeaderProps) {
+  const isDarkHeader = darkHeader || olympicsDark;
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -32,10 +40,12 @@ export function Header({ olympicsActive = false, olympicsDark = false }: HeaderP
       className={cn(
         "gap-1.5 px-3 py-1.5 text-xs sm:text-sm",
         olympicsActive
-          ? olympicsDark
-            ? "border-amber-400/30 bg-amber-400/10 text-amber-200"
+          ? isDarkHeader
+            ? "border-transparent bg-violet-500/10 text-violet-200"
             : "border-amber-200/50 bg-amber-50/80 text-amber-800"
-          : "cursor-pointer hover:bg-accent/15 transition-colors",
+          : isDarkHeader
+            ? "border-transparent bg-violet-500/10 text-violet-200 hover:bg-violet-500/18"
+            : "cursor-pointer hover:bg-accent/15 transition-colors",
       )}
     >
       <AppleEmoji name="trophy" size={16} />
@@ -49,9 +59,9 @@ export function Header({ olympicsActive = false, olympicsDark = false }: HeaderP
         className={cn(
           "fixed inset-x-0 top-0 z-50 overflow-hidden transition-all duration-300 pt-[env(safe-area-inset-top,0px)]",
           scrolled
-            ? olympicsDark
-              ? "glass-header-olympics-scrolled rounded-b-2xl"
-              : "glass-header-scrolled rounded-b-2xl"
+            ? isDarkHeader
+              ? "glass-header-olympics-scrolled rounded-b-3xl"
+              : "glass-header-scrolled rounded-b-3xl"
             : "bg-transparent",
         )}
       >
@@ -64,7 +74,7 @@ export function Header({ olympicsActive = false, olympicsDark = false }: HeaderP
             <img
               src={IMAGES.logo}
               alt="AI Fuňe"
-              className="h-8 w-auto sm:h-10"
+              className={cn("h-8 w-auto sm:h-10", isDarkHeader && "invert")}
             />
           </Link>
           {olympicsActive ? olympicsBadge : <Link to="/olympics">{olympicsBadge}</Link>}
@@ -73,8 +83,8 @@ export function Header({ olympicsActive = false, olympicsDark = false }: HeaderP
           <div
             className={cn(
               "h-px",
-              olympicsActive
-                ? "bg-gradient-to-r from-transparent via-amber-200/40 to-transparent"
+              olympicsActive || isDarkHeader
+                ? "bg-gradient-to-r from-transparent via-violet-400/35 to-transparent"
                 : "bg-black/6",
             )}
           />

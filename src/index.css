@@ -135,72 +135,75 @@ body {
 
 .olympics-glow {
   box-shadow:
-    0 0 0 1px rgba(251, 191, 36, 0.15),
-    0 8px 32px rgba(251, 191, 36, 0.12);
+    0 0 0 1px rgba(167, 139, 250, 0.18),
+    0 8px 32px rgba(88, 28, 135, 0.22);
 }
 
-/* Olympics dark theme — liquid glass over EvilEye background */
+/* Olympics dark theme — liquid glass over EvilEye background.
+   Neutral near-black base; purple only where it means something. */
 .olympics-theme {
-  --color-muted: #d4d4d8;
+  --color-muted: #8e8a99;
+  background:
+    radial-gradient(80rem 40rem at 50% -12%, rgba(109, 40, 217, 0.2) 0%, transparent 58%),
+    #08060d;
 }
 
 .olympics-theme .glass-liquid {
-  background: rgba(8, 8, 8, 0.58);
-  backdrop-filter: blur(32px) saturate(1.5);
-  -webkit-backdrop-filter: blur(32px) saturate(1.5);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 8, 14, 0.66);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   box-shadow:
     0 8px 40px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .olympics-theme .glass-liquid-gold {
-  background: rgba(20, 12, 4, 0.62);
-  backdrop-filter: blur(32px) saturate(1.6);
-  -webkit-backdrop-filter: blur(32px) saturate(1.6);
-  border: 1px solid rgba(251, 191, 36, 0.28);
+  background: rgba(14, 10, 20, 0.7);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(167, 139, 250, 0.24);
   box-shadow:
     0 8px 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 rgba(251, 191, 36, 0.1);
+    0 0 28px rgba(109, 40, 217, 0.12),
+    inset 0 1px 0 rgba(216, 180, 254, 0.1);
 }
 
 .olympics-theme .glass-liquid-row {
-  background: rgba(12, 12, 12, 0.5);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.07);
 }
 
 .olympics-heading-gradient {
-  background: linear-gradient(135deg, #fef08a 0%, #fbbf24 42%, #fb923c 100%);
+  background: linear-gradient(160deg, #f2f0f7 0%, #d8ccf4 45%, #9a6ef5 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 2px 12px rgba(251, 191, 36, 0.55));
+  filter: drop-shadow(0 2px 16px rgba(124, 58, 237, 0.4));
 }
 
 .olympics-kicker {
-  color: rgba(254, 243, 199, 0.95);
+  color: rgba(216, 204, 244, 0.92);
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
 }
 
 .olympics-subtitle {
-  color: rgba(228, 228, 231, 0.88);
+  color: rgba(226, 224, 232, 0.72);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
 }
 
 .olympics-section-title {
-  color: rgba(254, 215, 170, 0.95);
+  color: rgba(216, 204, 244, 0.9);
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
 }
 
 .olympics-section-title-gold {
-  color: rgba(253, 230, 138, 0.96);
+  color: rgba(233, 225, 250, 0.94);
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
 }
 
 .olympics-table-head {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(226, 224, 232, 0.55);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
 }
 
@@ -253,12 +256,94 @@ body {
   border-color: rgba(251, 146, 60, 0.16);
 }
 
-.glass-header-olympics-scrolled {
-  background: rgba(0, 0, 0, 0.62);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+.glass-header-olympics-scrolled,
+.lander-theme .glass-header-scrolled {
+  background: rgba(6, 4, 10, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Main lander dark theme — near-black neutral base, purple as a single
+   directional light source, not a tint on everything */
+.lander-theme {
+  --color-background: #08060d;
+  --color-foreground: #f2f0f7;
+  --color-muted: #8e8a99;
+  --color-card: rgba(255, 255, 255, 0.03);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-accent: #8b5cf6;
+  --color-accent-foreground: #ffffff;
+  color: var(--color-foreground);
+  background:
+    radial-gradient(90rem 44rem at 78% -14%, rgba(109, 40, 217, 0.26) 0%, transparent 58%),
+    radial-gradient(64rem 40rem at -20% 112%, rgba(76, 29, 149, 0.14) 0%, transparent 55%),
+    #08060d;
+}
+
+/* Film grain — kills the smooth-gradient AI look */
+.lander-theme::after,
+.olympics-theme::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+.lander-theme .glass {
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.lander-theme .glass-gold {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.lander-theme input {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f2f0f7;
+}
+
+.lander-theme input::placeholder {
+  color: rgba(142, 138, 153, 0.6);
+}
+
+.lander-theme input:focus-visible {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18);
+}
+
+.lander-theme .hover\:bg-white\/30:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.lander-theme .border-black\/6 {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lander-theme .glass,
+  .lander-theme .glass-gold {
+    background: rgba(16, 8, 28, 0.92);
+  }
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -282,4 +367,40 @@ body {
 
 .safe-bottom {
   padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+}
+
+/* Primary button — theme-aware vertical gradient with inner top light */
+.btn-gradient {
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-accent), white 18%) 0%,
+    var(--color-accent) 52%,
+    color-mix(in oklab, var(--color-accent), black 16%) 100%
+  );
+}
+
+.lander-theme ::selection,
+.olympics-theme ::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: #fff;
+}
+
+.lander-theme input:hover:not(:focus-visible) {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Lift-on-hover for interactive cards */
+.card-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .card-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.16);
+  }
 }

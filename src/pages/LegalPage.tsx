@@ -1,5 +1,4 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { AmbientBlobs } from "@/components/AmbientBlobs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { LegalDocumentContent } from "@/components/LegalDocumentContent";
@@ -14,14 +13,8 @@ export default function LegalPage() {
   }
 
   return (
-    <div className="relative min-h-dvh w-full bg-background text-foreground">
-      <AmbientBlobs
-        blobs={[
-          { className: "left-0 top-0 size-80 -translate-x-1/3 bg-accent/10" },
-          { className: "right-0 top-24 size-64 translate-x-1/3 bg-cyan-300/15" },
-        ]}
-      />
-      <Header />
+    <div className="lander-theme relative min-h-dvh w-full">
+      <Header darkHeader />
       <main className="w-full px-4 pb-16 pt-6 sm:px-6 sm:pt-10 lg:px-8">
         <div className="mx-auto w-full max-w-3xl">
         <Link

@@ -50,7 +50,7 @@ export function FounderStory() {
           <img
             src={IMAGES.founderStory}
             alt="Mr. Byznys"
-            className="w-full rounded-2xl object-cover shadow-xl ring-1 ring-black/5"
+            className="w-full rounded-2xl object-cover shadow-xl shadow-black/50 ring-1 ring-white/10"
           />
           <div className="absolute -bottom-4 left-4 flex items-center gap-2 rounded-full glass px-3 py-1.5 text-sm font-medium shadow-md">
             <Avatar className="size-7">

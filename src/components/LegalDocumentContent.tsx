@@ -20,10 +20,10 @@ function LegalBlockView({ block }: { block: LegalBlock }) {
       );
     case "table":
       return (
-        <div className="overflow-x-auto rounded-xl border border-black/8">
+        <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full min-w-[280px] text-left text-sm">
             <thead>
-              <tr className="border-b border-black/8 bg-black/[0.02]">
+              <tr className="border-b border-border bg-foreground/[0.04]">
                 <th className="px-4 py-3 font-semibold text-foreground">
                   {block.headers[0]}
                 </th>
@@ -36,7 +36,7 @@ function LegalBlockView({ block }: { block: LegalBlock }) {
               {block.rows.map(([left, right]) => (
                 <tr
                   key={`${left}-${right}`}
-                  className="border-b border-black/5 last:border-0"
+                  className="border-b border-border last:border-0"
                 >
                   <td className="px-4 py-3 text-foreground/90">{left}</td>
                   <td className="px-4 py-3 text-foreground/90">{right}</td>

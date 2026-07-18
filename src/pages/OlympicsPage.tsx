@@ -41,10 +41,10 @@ const medalStyles = {
     avatarRing: "ring-orange-400/50",
   },
   "": {
-    row: "glass-liquid-row hover:bg-white/10",
-    badge: "bg-white/10 text-orange-300 ring-1 ring-white/15",
-    place: "text-zinc-400",
-    avatarRing: "ring-white/25",
+    row: "glass-liquid-row hover:bg-white/5",
+    badge: "bg-white/8 text-zinc-300 ring-1 ring-white/12",
+    place: "text-zinc-500",
+    avatarRing: "ring-white/15",
   },
 } as const;
 
@@ -70,7 +70,7 @@ function LeaderboardRow({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.04 }}
       className={cn(
-        "group grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center gap-x-2.5 gap-y-1 rounded-xl px-3 py-3 transition-colors sm:grid-cols-[3.25rem_1fr_7rem_5.5rem] sm:grid-rows-1 sm:gap-4 sm:rounded-2xl sm:px-4 sm:py-3.5",
+        "group grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center gap-x-2.5 gap-y-1 rounded-xl px-3 py-3 transition duration-300 hover:-translate-y-0.5 sm:grid-cols-[3.25rem_1fr_7rem_5.5rem] sm:grid-rows-1 sm:gap-4 sm:rounded-2xl sm:px-4 sm:py-3.5",
         style.row,
         isPodium && "sm:py-4",
       )}
@@ -146,7 +146,7 @@ function SidebarRankItem({
   const medal = podiumMedals[rank];
 
   return (
-    <div className="flex items-center gap-3 rounded-xl glass-liquid-row px-3 py-2.5 transition-colors hover:bg-white/10">
+    <div className="flex items-center gap-3 rounded-xl glass-liquid-row px-3 py-2.5 transition-colors hover:bg-white/5">
       {medal ? (
         <AppleEmoji name={medal} size={22} />
       ) : (
@@ -154,7 +154,7 @@ function SidebarRankItem({
           {rank}
         </span>
       )}
-      <Avatar className="size-9 ring-2 ring-white/20">
+      <Avatar className="size-9 ring-2 ring-white/15">
         <AvatarImage src={avatar} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
@@ -170,29 +170,31 @@ function SidebarRankItem({
 
 export default function OlympicsPage() {
   return (
-    <div className="olympics-theme relative min-h-dvh w-full bg-black text-white">
+    <div className="olympics-theme relative min-h-dvh w-full text-white">
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 z-0 size-full overflow-hidden"
       >
         <div className="size-full -translate-y-[11vh] sm:-translate-y-[14vh]">
           <EvilEye
-            eyeColor="#FF6F37"
-            intensity={1.5}
+            eyeColor="#6d28d9"
+            intensity={0.85}
             pupilSize={2}
             irisWidth={0.35}
-            glowIntensity={0.3}
+            glowIntensity={0.18}
             scale={1}
             noiseScale={1.2}
             pupilFollow={1.0}
-            flameSpeed={1.1}
-            backgroundColor="#000000"
+            flameSpeed={0.9}
+            backgroundColor="#08060d"
             globalMouseTracking
           />
         </div>
+        <div className="absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_30%,transparent_0%,rgba(8,6,13,0.55)_62%,rgba(8,6,13,0.92)_100%)]" />
+        <div className="absolute inset-0 bg-black/35" />
       </div>
 
-      <Header olympicsActive olympicsDark />
+      <Header olympicsActive darkHeader />
 
       <main className="relative z-10 mx-auto w-full max-w-xl px-7 py-5 sm:max-w-2xl sm:px-12 sm:py-10 lg:max-w-4xl lg:px-16 xl:max-w-[52rem] xl:px-20">
         <motion.div
@@ -216,12 +218,12 @@ export default function OlympicsPage() {
             <button
               type="button"
               title={OLYMPICS_PREV_MONTH}
-              className="flex size-11 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-amber-200"
+              className="flex size-11 items-center justify-center rounded-full text-zinc-400 transition-colors hover:bg-white/5 hover:text-zinc-200"
               aria-label={OLYMPICS_PREV_MONTH}
             >
               <ChevronLeft className="size-4 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]" />
             </button>
-            <p className="min-w-0 px-1 text-sm font-semibold text-amber-200 drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)] sm:min-w-[10rem] sm:px-2 sm:text-base">
+            <p className="min-w-0 px-1 text-sm font-semibold text-violet-200 drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)] sm:min-w-[10rem] sm:px-2 sm:text-base">
               {OLYMPICS_MONTH}
             </p>
             <button
@@ -237,7 +239,7 @@ export default function OlympicsPage() {
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr_240px] lg:gap-6">
           <section className="glass-liquid order-2 rounded-2xl p-3 sm:order-1 sm:rounded-2xl sm:p-4 lg:order-1">
-            <div className="olympics-table-head mb-3 hidden grid-cols-[3.25rem_1fr_7rem_5.5rem] gap-4 border-b border-white/20 px-3 pb-3 text-[11px] font-bold uppercase tracking-widest sm:grid">
+            <div className="olympics-table-head mb-3 hidden grid-cols-[3.25rem_1fr_7rem_5.5rem] gap-4 border-b border-white/10 px-3 pb-3 text-[11px] font-bold uppercase tracking-widest sm:grid">
               <span>Rank</span>
               <span>Name</span>
               <span className="text-right">Performance</span>
@@ -315,7 +317,7 @@ export default function OlympicsPage() {
           </p>
           <Link
             to="/"
-            className="inline-flex items-center gap-1 rounded-full glass-liquid px-4 py-2 text-sm font-medium text-orange-300 transition-colors hover:bg-white/10"
+            className="inline-flex items-center gap-1 rounded-full glass-liquid px-4 py-2 text-sm font-medium text-violet-300 transition-colors hover:bg-violet-500/10"
           >
             ← Späť na hlavnú stránku
           </Link>

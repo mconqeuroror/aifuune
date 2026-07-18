@@ -99,7 +99,7 @@ export function ScrollCaptureModal() {
         <button
           type="button"
           onClick={dismiss}
-          className="absolute right-2 top-2 flex size-11 items-center justify-center rounded-lg text-muted hover:bg-black/5"
+          className="absolute right-2 top-2 flex size-11 items-center justify-center rounded-lg text-muted transition-colors hover:bg-foreground/8 hover:text-foreground"
           aria-label="Zavrieť"
         >
           <X className="size-5" />
