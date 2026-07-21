@@ -41,10 +41,10 @@ export function Header({
         "gap-1.5 px-3 py-1.5 text-xs sm:text-sm",
         olympicsActive
           ? isDarkHeader
-            ? "border-transparent bg-violet-500/10 text-violet-200"
+            ? "badge-gradient-hover border-transparent bg-violet-500/10 text-violet-200"
             : "border-amber-200/50 bg-amber-50/80 text-amber-800"
           : isDarkHeader
-            ? "border-transparent bg-violet-500/10 text-violet-200 hover:bg-violet-500/18"
+            ? "badge-gradient-hover cursor-pointer border-transparent bg-violet-500/10 text-violet-200 hover:text-violet-100"
             : "cursor-pointer hover:bg-accent/15 transition-colors",
       )}
     >
@@ -60,8 +60,8 @@ export function Header({
           "fixed inset-x-0 top-0 z-50 overflow-hidden transition-all duration-300 pt-[env(safe-area-inset-top,0px)]",
           scrolled
             ? isDarkHeader
-              ? "glass-header-olympics-scrolled rounded-b-3xl"
-              : "glass-header-scrolled rounded-b-3xl"
+              ? "glass-header-olympics-scrolled rounded-b-[1.75rem]"
+              : "glass-header-scrolled rounded-b-[1.75rem]"
             : "bg-transparent",
         )}
       >

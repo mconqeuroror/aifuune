@@ -70,7 +70,7 @@ export function FounderStory() {
       >
         <Card className="glass">
           <CardContent className="p-6 text-center sm:p-8">
-            <blockquote className="text-lg font-semibold leading-snug text-accent sm:text-xl">
+            <blockquote className="text-lg font-semibold leading-snug text-foreground sm:text-xl">
               „Bez diplomu, bez návodu, len ja a môj notebook."
             </blockquote>
           </CardContent>

@@ -65,7 +65,7 @@ export function EmailCaptureForm({
     return (
       <div
         className={cn(
-          "glass rounded-2xl text-left",
+          "glass glass-cta rounded-2xl text-left",
           compact ? "p-3" : "p-4 sm:p-5",
           className,
         )}
@@ -97,7 +97,7 @@ export function EmailCaptureForm({
   return (
     <div
       className={cn(
-        "glass rounded-2xl",
+        "glass glass-cta rounded-2xl",
         compact ? "p-3" : "p-4 sm:p-5",
         className,
       )}

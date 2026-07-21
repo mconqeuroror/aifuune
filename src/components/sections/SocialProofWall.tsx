@@ -56,7 +56,7 @@ function LazyProofCard({
 
 export function SocialProofWall() {
   return (
-    <section className="w-full bg-zinc-950 px-4 py-14 text-zinc-100 sm:px-6 sm:py-20 lg:px-8">
+    <section className="w-full border-y border-white/5 bg-black/45 px-4 py-14 text-zinc-100 sm:px-6 sm:py-20 lg:px-8">
       <div className="w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ export function SocialProofWall() {
           viewport={{ once: true }}
           className="mb-10 text-center"
         >
-          <h2 className="text-2xl font-bold sm:text-3xl">
+          <h2 className="section-title text-2xl font-bold sm:text-3xl">
             Recenzie a výsledky ľudí z komunity
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">

@@ -15,7 +15,7 @@ export function FAQSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-8 text-center text-2xl font-bold sm:text-3xl"
+          className="section-title mb-8 text-center text-2xl font-bold sm:text-3xl"
         >
           Najčastejšie otázky a odpovede
         </motion.h2>

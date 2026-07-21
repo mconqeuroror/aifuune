@@ -24,7 +24,7 @@ export function BenefitGrid() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-8 text-center text-2xl font-bold sm:text-3xl"
+          className="section-title mb-8 text-center text-2xl font-bold sm:text-3xl"
         >
           Čo sa dozvieš vo videu?
         </motion.h2>

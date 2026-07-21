@@ -313,7 +313,7 @@ export default function OlympicsPage() {
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
           <p className="flex items-center gap-2 text-xs text-zinc-400 drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
             <span className="size-1.5 animate-pulse rounded-full bg-green-500" />
-            Last updated: {OLYMPICS_LAST_UPDATED}
+            Posledná aktualizácia: {OLYMPICS_LAST_UPDATED}
           </p>
           <Link
             to="/"

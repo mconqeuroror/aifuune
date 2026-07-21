@@ -105,7 +105,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="w-full overflow-visible px-1 text-[1.75rem] font-bold leading-[1.15] tracking-tight sm:px-2 sm:text-4xl md:text-[2.85rem]"
+            className="font-display w-full overflow-visible px-1 text-[1.75rem] font-bold leading-[1.12] tracking-tight sm:px-2 sm:text-4xl md:text-[3rem]"
           >
             Ako zarobiť{" "}
             <span className="font-display inline-block pl-1.5 pr-0.5 font-bold tracking-normal text-money text-money-glow">
@@ -139,7 +139,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="mx-auto mt-4 flex w-[85%] items-start justify-center gap-2 text-left text-sm leading-relaxed text-foreground/80 sm:text-base"
+            className="mx-auto mt-4 flex w-[85%] items-start justify-center gap-2 rounded-xl border border-amber-300/15 bg-amber-400/5 px-4 py-3 text-left text-sm leading-relaxed text-foreground/85 sm:text-base"
           >
             <AppleEmoji name="gift" size={22} className="mt-0.5 shrink-0" />
             <span>
@@ -162,7 +162,7 @@ export function MemberResultsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-2.5 text-center text-2xl font-bold sm:mb-3 sm:text-3xl"
+          className="section-title mb-2.5 text-center text-2xl font-bold sm:mb-3 sm:text-3xl"
         >
           Výsledky členov
         </motion.h2>

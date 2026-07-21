@@ -11,7 +11,7 @@ export type LeaderboardEntry = {
 
 export const OLYMPICS_MONTH = "July 2026 Leaderboard";
 export const OLYMPICS_PREV_MONTH = "June 2026";
-export const OLYMPICS_LAST_UPDATED = "34 minutes ago";
+export const OLYMPICS_LAST_UPDATED = "pred 34 minútami";
 
 export const JULY_LEADERBOARD: LeaderboardEntry[] = [
   {

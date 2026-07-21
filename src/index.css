@@ -258,11 +258,11 @@ body {
 
 .glass-header-olympics-scrolled,
 .lander-theme .glass-header-scrolled {
-  background: rgba(6, 4, 10, 0.78);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(6, 4, 10, 0.5);
+  backdrop-filter: blur(22px) saturate(1.3);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Main lander dark theme — near-black neutral base, purple as a single
@@ -369,14 +369,75 @@ body {
   padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
 }
 
-/* Primary button — theme-aware vertical gradient with inner top light */
+/* Primary button — base gradient + hover fade-in overlay */
 .btn-gradient {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background-image: linear-gradient(
     180deg,
     color-mix(in oklab, var(--color-accent), white 18%) 0%,
     var(--color-accent) 52%,
     color-mix(in oklab, var(--color-accent), black 16%) 100%
   );
+}
+
+.btn-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background-image: linear-gradient(
+    120deg,
+    color-mix(in oklab, var(--color-accent), white 32%) 0%,
+    var(--color-accent) 42%,
+    color-mix(in oklab, var(--color-accent), #5b21b6 35%) 100%
+  );
+}
+
+.btn-gradient:hover::before,
+.btn-gradient:focus-visible::before {
+  opacity: 1;
+}
+
+.btn-gradient:active::before {
+  opacity: 0.7;
+  transition-duration: 0.12s;
+}
+
+/* Olympics badge — soft violet wash that fades in on hover */
+.badge-gradient-hover {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.25s ease;
+}
+
+.badge-gradient-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background-image: linear-gradient(
+    120deg,
+    rgba(167, 139, 250, 0.35) 0%,
+    rgba(139, 92, 246, 0.28) 48%,
+    rgba(91, 33, 182, 0.4) 100%
+  );
+}
+
+.badge-gradient-hover:hover::before,
+.badge-gradient-hover:focus-visible::before {
+  opacity: 1;
 }
 
 .lander-theme ::selection,
@@ -387,6 +448,38 @@ body {
 
 .lander-theme input:hover:not(:focus-visible) {
   border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Section headings — display face + gradient tick underneath */
+.section-title {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  margin: 0.7rem auto 0;
+  height: 2px;
+  width: 3rem;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.9),
+    transparent
+  );
+}
+
+/* Conversion surfaces — violet-tinted glass so CTAs read differently
+   from informational cards */
+.lander-theme .glass-cta {
+  background: rgba(139, 92, 246, 0.07);
+  border-color: rgba(167, 139, 250, 0.3);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(109, 40, 217, 0.16),
+    inset 0 1px 0 rgba(216, 180, 254, 0.14);
 }
 
 /* Lift-on-hover for interactive cards */
